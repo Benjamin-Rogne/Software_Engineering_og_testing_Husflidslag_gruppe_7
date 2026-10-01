@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Østfold Husflidslag - Forside</title>
+     <link rel="stylesheet" href="frontend/style.css">
+</head>
+<body>
+    <!--Hovedmeny med topp logo som hjem-knapp og linker-->
+    <header class="sidefelt">
+        <a href="index.html" class="logo">
+            <img src="bilder/logo.png" alt="Østfold Husflidslag - til forsiden">
+        </a>
+
+
+        <nav class="meny">
+            <ul>
+                <li><a href="aktuelt.html">Aktuelt</a></li>
+                <li><a href="lokallag.html">Våre lokallag</a></li>
+                <li><a href="kurs.html">Kurs og aktiviteter</a></li>
+                <li><a href="kontakt.html">Kontakt oss</a></li>
+                <li><a href="faq.html">Ofte stilte spørsmål</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="arrangement">
+        <!--Info om kurset-->
+        <article class="arrangement-innhold">
+
+            <!--Tittel, dato og sted-->
+            <section class="kort">
+                <h1>Bunadskurs 2</h1>
+
+                <ul class="nokkelinfo">
+                    <li class="info-linje">
+                        <span class="ikon">📅</span>
+                        <span>24. august kl. 18:00 –<br>30. november kl. 21:00</span>
+                    </li>
+                    <li class="info-linje">
+                        <span class="ikon">📍</span>
+                        <span><span class="stor">Fredrikstad husflidslag</span><br>Emil Mørchs vei 25, 1653 Sellebakk, Norge</span>
+                    </li>
+                </ul>
+
+                <p class="melding">ⓘ Påmeldingen er lukket</p>
+            </section>
+
+            <!-- kurset-->
+            <section class="kort">
+                <h2>Om arrangementet</h2>
+                <p class="liten">Arrangør: Fredrikstad Husflidslag</p>
+                <p><strong>Bunadskurs</strong>, 10 ganger 3 timer</p>
+                <p><strong>Lærer:</strong> Julie Mari Brevik</p>
+                <p>På dette kurset kan man få veiledning i å brodere og sy Østfoldbunad dame eller herre. Løkendrakten, Herregårdsbunaden eller evt. en annen bunad. Hvis du planlegger å brodere bunad fra et annet distrikt er det lurt å kontakte Unn på tlf. 93660764 først. Om du skal sy og montere en hel bunad må du beregne å bruke mye tid på arbeidet hjemme også, og antagelig være med på kurs både i høst- og vårsemesteret.</p>
+                <p><strong>Materialer:</strong> Man må bestille materialer og få tatt mål i god tid, slik at de er ferdig klippet før kursstart. Info om hvor du får tak i materialpakke finner du på beskrivelsen på nettsiden.</p>
+                <p><strong>Datoer:</strong> 24.8, 3.9, 14.9, 28.9, 5.10, 19.10, 29.10, 5.11, 12.11, 26.11, kl. 18–21</p>
+                <p><strong>Pris:</strong> kr 3600/3000, ungdom under 26 år kr 1500</p>
+            </section>
+
+            <!--cart-->
+            <section class="kort kart-kort">
+                <iframe src="https://www.google.com/maps?q=Emil+Mørchs+vei+25,+1653+Sellebakk&output=embed" title="Kart"></iframe>
+                <p class="info-linje kart-adresse">
+                    <span class="ikon">📍</span>
+                    <span><span class="stor">Fredrikstad husflidslag</span><br>Emil Mørchs vei 25, 1653 Sellebakk, Norge</span>
+                </p>
+            </section>
+        </article>
+
+        <!--picture-->
+        <aside class="arrangement-bilde">
+            <img src="bilder/bunadskurs.jpg" alt="Bunader">
+        </aside>
+    </main>
+    
+    <footer class="bunntekst">
+        <address>
+            <strong>Østfold Husflidslag</strong><br>
+            Emil Mørchs vei 25, 1653 Sellebakk<br>
+            E-post: <a href="mailto:ostfoldhusflid@gmail.com">ostfoldhusflid@gmail.com</a>
+            Telefon: <a href="tel:91777582">91777582</a>
+        </address>
+    </footer>
+</body>
+</html>
