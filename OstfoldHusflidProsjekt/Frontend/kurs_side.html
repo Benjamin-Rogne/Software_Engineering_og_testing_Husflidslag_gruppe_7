@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>Østfold Husflid </h1>
+    </header>
+
+    <main>
+        <h2>Kurs og aktiviteter </h2>
+    
+
+
+        <!--Hovedmeny med topp logo som hjem-knapp og linker-->
+        <header class="sidefelt">
+            <a href="index.html" class="logo">
+                <img src="bilder/logo.png" alt="Østfold Husflidslag - til forsiden">
+            </a>
+
+
+            <nav class="meny">
+                <ul>
+                    <li><a href="aktuelt.html">Aktuelt</a></li>
+                    <li><a href="lokallag.html">Våre lokallag</a></li>
+                    <li><a href="kurs_side.html">Kurs og aktiviteter</a></li>
+                    <li><a href="kontakt.html">Kontakt oss</a></li>
+                    <li><a href="faq.html">Ofte stilte spørsmål</a></li>
+                </ul>
+            </nav>
+        </header>
+
+
+        //Bokser for sortering av kursene, etter dato, pris, type kurs etc.
+
+        //oversikt starter her:
+        <section class="kurs-oversikt">
+            <form>
+                <label for="sortering">Sorter etter:</label>
+                <select id="sortering" name="sortering">
+                    <option value="dato">Dato</option>
+                    <option value="pris">Pris</option>
+                    <option value="type">Type kurs</option>
+                    <option value="område">Område</option>
+                </select>
+                <button type="submit">Sorter</button>
+            </form>
+        </section>
+        //viser rundt 10 kurskort, per side, med mulighet for å bla til neste side med flere kurskort.
+        //kortene kobler til en egen kurs-side, med mer detaljert informasjon om kurset.
+        //kursene er koblet til Database der info om, kurset med tittel, beskrivelse, pris, dato, sted og bilde er lagret.
+        //selve kursene, med bilde, tittel, kort beskrivelse, pris og dato.
+        //delt opp i bokser, der hver boks er et kurs.
+
+        <!--Foreløpig bunntekst som skal være gjennomgående på alle sider-->
+        <footer class="bunntekst">
+            <address>
+                <strong>Østfold Husflidslag</strong><br>
+                Emil Mørchs vei 25, 1653 Sellebakk<br>
+                E-post: <a href="mailto:ostfoldhusflid@gmail.com">ostfoldhusflid@gmail.com</a><br>
+                Telefon: <a href="tel:91777582">+47 917 77 582</a>
+            </address>
+        </footer>
+    </main>
+
+</body>
+</html>
