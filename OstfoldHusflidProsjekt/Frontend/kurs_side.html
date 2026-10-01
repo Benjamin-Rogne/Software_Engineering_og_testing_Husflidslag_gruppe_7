@@ -37,8 +37,8 @@
 
         //Bokser for sortering av kursene, etter dato, pris, type kurs etc.
 
-        //oversikt starter her:
-        <section class="kurs-oversikt">
+        <!-- Kurs filtrering -->
+        <section class="kurs-filtrering">
             <form>
                 <label for="sortering">Sorter etter:</label>
                 <select id="sortering" name="sortering">
@@ -50,11 +50,39 @@
                 <button type="submit">Sorter</button>
             </form>
         </section>
+        
+        
+        
+        <!-- Kurskorte -->
+        
         //viser rundt 10 kurskort, per side, med mulighet for å bla til neste side med flere kurskort.
         //kortene kobler til en egen kurs-side, med mer detaljert informasjon om kurset.
         //kursene er koblet til Database der info om, kurset med tittel, beskrivelse, pris, dato, sted og bilde er lagret.
         //selve kursene, med bilde, tittel, kort beskrivelse, pris og dato.
         //delt opp i bokser, der hver boks er et kurs.
+        
+        
+        
+        
+        <!-- Kurskort -->
+        <section class="kurs-container">
+
+            <article class="kurs-kort">
+                <img src="bilder/kurs1.jpg" alt="Kurs 1 bilde">
+                <h3>Kurs 1</h3>
+                <p>Kort beskrivelse av kurs 1.</p>
+                <p>Pris: 500 kr</p>
+                <p>Dato: 01.01.2024</p>
+                <a href="kurs1.html">Les mer</a>
+            </article>
+
+
+            // kurs kort fortsetter ned her? 
+
+        </section>
+
+
+
 
         <!--Foreløpig bunntekst som skal være gjennomgående på alle sider-->
         <footer class="bunntekst">
