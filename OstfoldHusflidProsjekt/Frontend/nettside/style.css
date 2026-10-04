@@ -9,7 +9,7 @@
     --graa-hover: #c8c8c8;
     --font: Arial, Helvetica, sans-serif;
     --meny-topp:160px;
-    --innhold-bredde: 850px;
+    --innhold-bredde: 950px;
 
 }
 
@@ -96,7 +96,7 @@ body {
     grid-column: 3;
     grid-row: 1;
     align-self: start;
-    padding: 60px 60px 40px 100px;
+    padding: 60px 30px 40px 60px;
     display: grid;
     grid-template-columns: 1fr 240px;
     column-gap: 60px;
