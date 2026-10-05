@@ -229,3 +229,168 @@ a:focus-visible {
 }
 
 
+/* Kursoversikt*/
+/*tittel*/
+.kursside > h1 {
+    text-align: left;
+    font-style: normal;
+    text-decoration: none;
+    font-size: 2.4rem;
+    font-weight: normal;
+    margin-bottom: 30px;
+}
+
+
+/* Filtrering*/
+.kurs-filtrering {
+    margin-bottom: 30px;
+}
+
+/*Bokser, felter i to kolonner*/
+.kurs-filtrering form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 40px;
+    padding: 16px 20px;
+    background: var(--graa);
+    border-radius: 6px;
+}
+
+/*"sorter etter:" over feltene*/
+.kurs-filtrering label {
+    grid-column: 1 / -1;
+    font-size: 1rem;
+}
+
+.kurs-filtrering select {
+    padding: 6px 8px;
+    font: inherit;
+    font-size: 0.9rem;
+    border: 1px solid var(--graa-linje);
+    border-radius: 4px;
+    background: var(--bakgrunn);
+    cursor: pointer;
+}
+
+.kurs-filtrering button {
+    display: block;
+    margin: 12px 0 0 auto;
+    padding: 8px 20px;
+    font: inherit;
+    border: none;
+    border-radius: 4px;
+    background: var(--rod);
+    color: #fff;
+    cursor: pointer;
+}
+
+.kurs-filtrering form button {
+    grid-column: 1 / -1;
+    justify-self: end;
+    margin: 0;
+}
+
+.kurs-filtrering button:hover {
+    background: var(--rod-mork);
+}
+
+.kurs-filtrering select:focus-visible,
+.kurs-filtrering button:focus-visible {
+    outline: 3px solid var(--rod);
+    outline-offset: 2px;
+}
+
+/* kursoversikt med to kort i bredden*/
+.kurs-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+/*Ett kurskort*/
+.kurs-container .kurs-kort {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "bilde bilde"
+    "navn omraade"
+    "dato adresse"
+    "beskrivelse beskrivelse"
+    "pris lenke";
+    column-gap: 16px;
+    row-gap: 4px;
+    padding-bottom: 14px;
+    background: var(--graa);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.85rem;
+}
+
+.kurs-container .kurs-kort img {
+    grid-area: bilde;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: #c4c4c4; /*plassholder*/
+    border: none;
+    margin-bottom: 8px;
+}
+
+
+.kurs-container .kurs-kort h3 {
+    grid-area: navn;
+    margin: 0 0 0 12px;
+    font-size: 1rem;
+}
+
+.kurs-container.kurs-kort p {margin: 0;}
+
+/*plassering av avsnitt fra oppsett i html*/
+.kurs-container .kurs-kort p:nth-of-type(1) {
+    grid-area: beskrivelse; 
+    margin: 8px 12px 0;
+}
+.kurs-container .kurs-kort p:nth-of-type(2) {
+    grid-area: pris;
+    margin-left: 12px;
+    align-self: center;
+    font-weight: bold;
+}
+.kurs-container .kurs-kort p:nth-of-type(3) {
+    grid-area: dato;
+    margin-left: 12px;
+}
+.kurs-container .kurs-kort p:nth-of-type(4) {
+    grid-area: omraade;
+}
+.kurs-container .kurs-kort p:nth-of-type(5) {
+    grid-area: adresse;
+}
+
+/*skillelinje*/
+.kurs-container .kurs-kort p:nth-of-type(4),
+.kurs-container .kurs-kort p:nth-of-type(5) {
+    margin-right: 12px;
+    padding-left: 12px;
+    border-left: 1px solid var(--graa-linje);
+} 
+
+/*"les mer"-knapp*/
+.kurs-container .kurs-kort a {
+    grid-area: lenke;
+    justify-self: end;
+    display: inline-block;
+    margin: 8px 12px 0 0;
+    padding: 6px 14px;
+    background: var(--rod);
+    color: #fff;
+    border-radius: 4px;
+    overflow: visible;
+    text-decoration: none;
+}
+
+.kurs-container .kurs-kort a:hover,
+.kurs-container .kurs-kort a:focus-visible {
+    background: var(--rod-mork);
+}
