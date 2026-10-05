@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Østfold Husflidslag - Kurs side</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+        <!--Hovedmeny med topp logo som hjem-knapp og linker-->
+        <header class="sidefelt">
+            <a href="index.html" class="logo">
+                <img src="bilder/logo.png" alt="Østfold Husflidslag - til forsiden">
+            </a>
+
+
+            <nav class="meny">
+                <ul>
+                    <li><a href="aktuelt.html">Aktuelt</a></li>
+                    <li><a href="lokallag.html">Våre lokallag</a></li>
+                    <li><a href="kurs.html">Kurs og aktiviteter</a></li>
+                    <li><a href="kontakt.html">Kontakt oss</a></li>
+                    <li><a href="faq.html">Ofte stilte spørsmål</a></li>
+                </ul>
+            </nav>
+        </header>
+    <main class="innhold kursside">
+        <h1>Kurs og aktiviteter </h1>
+
+        <!--Bokser for sortering av kursene, etter dato, pris, type kurs etc.-->
+
+        <!-- Kurs filtrering -->
+        <section class="kurs-filtrering">
+            <form>
+                <label for="sortering">Sorter etter:</label>
+                <select id="sortering" name="sortering">
+                    <option value="dato">Dato</option>
+                    <option value="pris">Pris</option>
+                    <option value="type">Type kurs</option>
+                </select>
+                <select id="omraade" name="omraade" aria-label="Område">
+                    <option value="omraade">Østfold</option>
+                    <option value="omraade">Fredrikstad</option>
+                    <option value="omraade">Sarpsborg</option>
+                    <option value="omraade">Moss</option>
+                    <option value="omraade">Halden</option>
+                    <option value="omraade">Råde</option>
+                    <option value="omraade">Hobøl</option>7
+                    <option value="omraade">Rygge</option>
+                    <option value="omraade">Råde</option>
+                    <option value="omraade">Indre Østfold</option>
+                </select>
+            </form>
+                <button type="submit">Sorter</button>
+            </form>
+        </section>
+        
+        
+        
+        <!-- Kurskorte -->
+        
+        <!--viser rundt 10 kurskort, per side, med mulighet for å bla til neste side med flere kurskort.
+        kortene kobler til en egen kurs-side, med mer detaljert informasjon om kurset.
+        kursene er koblet til Database der info om, kurset med tittel, beskrivelse, pris, dato, sted og bilde er lagret.
+        selve kursene, med bilde, tittel, kort beskrivelse, pris og dato.
+        delt opp i bokser, der hver boks er et kurs.-->
+        
+        
+        
+        
+        <!-- Kurskort -->
+        <section class="kurs-container" aria-label="Kurs">
+
+            <article class="kurs-kort">
+                <img src="bilder/kurs1.jpg" alt="Kurs 1 bilde">
+                <h3>Kurs 1</h3>
+                <p>Kort beskrivelse av kurs 1.</p>
+                <p>Pris: 500 kr</p>
+                <p>Dato: 01.01.2024</p>
+                <p>Område: Oslo</p>
+                <p>Adresse: Emil Mørchs vei 25, 1653 Sellebakk</p>
+                <a href="kursinfside.html">Les mer</a>
+            </article>
+
+
+         <!-- kurs kort fortsetter ned her? -->
+
+            <article class="kurs-kort">
+                <img src="bilder/kurs1.jpg" alt="Kurs 1 bilde">
+                <h3>Kurs 1</h3>
+                <p>Kort beskrivelse av kurs 1.</p>
+                <p>Pris: 500 kr</p>
+                <p>Dato: 01.01.2024</p>
+                <p>Område: Oslo</p>
+                <p>Adresse: Emil Mørchs vei 25, 1653 Sellebakk</p>
+                <a href="kursinfside.html">Les mer</a>
+            </article>
+
+            <article class="kurs-kort">
+                <img src="bilder/kurs1.jpg" alt="Kurs 1 bilde">
+                <h3>Kurs 1</h3>
+                <p>Kort beskrivelse av kurs 1.</p>
+                <p>Pris: 500 kr</p>
+                <p>Dato: 01.01.2024</p>
+                <p>Område: Oslo</p>
+                <p>Adresse: Emil Mørchs vei 25, 1653 Sellebakk</p>
+                <a href="kursinfside.html">Les mer</a>
+            </article>
+            
+            <article class="kurs-kort">
+                <img src="bilder/kurs1.jpg" alt="Kurs 1 bilde">
+                <h3>Kurs 1</h3>
+                <p>Kort beskrivelse av kurs 1.</p>
+                <p>Pris: 500 kr</p>
+                <p>Dato: 01.01.2024</p>
+                <p>Område: Oslo</p>
+                <p>Adresse: Emil Mørchs vei 25, 1653 Sellebakk</p>
+                <a href="kursinfside.html">Les mer</a>
+            </article>
+            
+            <article class="kurs-kort">
+                <img src="bilder/kurs1.jpg" alt="Kurs 1 bilde">
+                <h3>Kurs 1</h3>
+                <p>Kort beskrivelse av kurs 1.</p>
+                <p>Pris: 500 kr</p>
+                <p>Dato: 01.01.2024</p>
+                <p>Område: Oslo</p>
+                <p>Adresse: Emil Mørchs vei 25, 1653 Sellebakk</p>
+                <a href="kursinfside.html">Les mer</a>
+            </article>
+
+        </section>
+
+    </main>
+
+     <!--Foreløpig bunntekst som skal være gjennomgående på alle sider-->
+        <footer class="bunntekst">
+            <address>
+                <strong>Østfold Husflidslag</strong><br>
+                Emil Mørchs vei 25, 1653 Sellebakk<br>
+                E-post: <a href="mailto:ostfoldhusflid@gmail.com">ostfoldhusflid@gmail.com</a><br>
+                Telefon: <a href="tel:91777582">+47 917 77 582</a>
+            </address>
+        </footer>
+</body>
+</html>
