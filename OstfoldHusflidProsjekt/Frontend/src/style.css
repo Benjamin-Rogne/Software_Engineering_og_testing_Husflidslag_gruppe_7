@@ -14,6 +14,9 @@
 }
 
 * {box-sizing: border-box;}
+#root {
+    display: contents;
+}
 
 /*sidelayout*/
 body {
@@ -191,13 +194,29 @@ h1 {
 }
 
 .pil {
-    font-size: 1.2rem;
-    font-weight: bold;
+    width: 22px;
+    height: 22px;
 }
 
 .kurs-kort a:hover,
 .kurs-kort a:focus-visible {
     background: var(--graa-hover);
+}
+
+.ikke-funnet {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 60px 30px;
+    text-align: center;
+}
+
+.ikke-funnet p {
+    margin: 0;
 }
 
 
@@ -470,8 +489,9 @@ a:focus-visible {
 /* Ikoner (tegnet med SVG-streker) */
 .ikon {
     flex-shrink: 0;
-    font-size: 1.1rem;
-    line-height: 1.4;
+    width: 20px;
+    height: 20px;
+    color: var(--rod);
 }
 
 /* Grå boks: "Påmeldingen er lukket" */
