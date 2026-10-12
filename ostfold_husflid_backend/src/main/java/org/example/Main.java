@@ -1,5 +1,5 @@
 package org.example;
-import models.Brukere;
+import models.Bruker;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -14,7 +14,7 @@ public class Main {
             // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
             IO.println("i = " + i);
         }
-        Brukere Benjalo = new Brukere(1, "Benjamin", "test@gmail.com", "1234", "Admin");
+        Bruker Benjalo = new Bruker(1, "Ola", "Nordmann@gmail.com", "1234Ola4321NordMann1234", "Admin");
         System.out.println(Benjalo);
     }
 }

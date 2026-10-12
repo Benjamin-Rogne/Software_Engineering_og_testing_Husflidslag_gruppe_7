@@ -1,18 +1,18 @@
 package models;
 
-public class Brukere {
-    private int Brukere_id;
+public class Bruker {
+    private int Bruker_id;
     private String Navn;
     private String Epost;
     private String Passord;
     private String Rolle;
 
-    public int getBrukere_id() {
-        return Brukere_id;
+    public int getBruker_id() {
+        return Bruker_id;
     }
 
-    public void setBrukere_id(int brukere_id) {
-        Brukere_id = brukere_id;
+    public void setBruker_id(int bruker_id) {
+        Bruker_id = bruker_id;
     }
 
     public String getNavn() {
@@ -47,16 +47,17 @@ public class Brukere {
         Rolle = rolle;
     }
 
-    public Brukere(int brukere_id, String navn, String epost, String passord, String rolle) {
-        Brukere_id = brukere_id;
+    //med bruker id
+    public Bruker(int bruker_id, String navn, String epost, String passord, String rolle) {
+        Bruker_id = bruker_id;
         Navn = navn;
         Epost = epost;
         Passord = passord;
         Rolle = rolle;
     }
 
-    // constuctor uten
-    public Brukere(String navn, String epost, String passord, String rolle) {
+    //uten bruker id
+    public Bruker(String navn, String epost, String passord, String rolle) {
         Navn = navn;
         Epost = epost;
         Passord = passord;
