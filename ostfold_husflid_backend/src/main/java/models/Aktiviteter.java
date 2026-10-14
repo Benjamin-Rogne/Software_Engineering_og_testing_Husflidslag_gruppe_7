@@ -43,9 +43,7 @@ public class Aktiviteter {
         return omraade_id;
     }
 
-    public void setAktivitet_id(int aktivitet_id) {
-        this.aktivitet_id = aktivitet_id;
-    }
+    public void setAktivitet_id(int aktivitet_id) {this.aktivitet_id = aktivitet_id;}
 
     public void setTittel(String tittle) {
         this.tittle = tittle;
