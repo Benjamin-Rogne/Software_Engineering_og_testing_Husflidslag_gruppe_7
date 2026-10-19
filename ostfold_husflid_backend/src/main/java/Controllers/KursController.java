@@ -1,4 +1,4 @@
-package controllers;
+package Controllers;
 import io.javalin.http.Context;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

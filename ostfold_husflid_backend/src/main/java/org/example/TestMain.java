@@ -1,7 +1,7 @@
 package org.example;
 
 import io.javalin.Javalin;
-import controllers.BrukerController;
+import Controllers.BrukerController;
 
 public class TestMain {
     public static void main(String[] args) {
