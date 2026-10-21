@@ -1,4 +1,5 @@
 package Controllers;
+import java.util.Map;
 import io.javalin.http.Context;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -72,6 +73,7 @@ public class KursController {
                 "Fredrikstad sentrum"
         ));
     }
+
     /*fungerer så lenge serveren eller koden er aktiv, vil bli tom ver gang man starter om server
      legger til kurs fra json
     201 betyr att en objekt har blitt created
@@ -85,9 +87,25 @@ public class KursController {
         ctx.json(nyttKurs);
     }
     // henter alle kurs og koverterer til json
-    public void getAllKurs (Context ctx){
+    /*public void getAllKurs (Context ctx){
+        System.out.println("getAllKurs blir kjørt!");
+        System.out.println("Antall kurs: " + kursListe.size());
 
         ctx.json(kursListe);
+    }*/
+    //ai får å finne test feil
+    public void getAllKurs(Context ctx) {
+
+        System.out.println("Antall kurs: " + kursListe.size());
+
+        ctx.json(kursListe.stream().map(kurs -> Map.of(
+                "kurs_id", kurs.getKurs_id(),
+                "tittle", kurs.getTittle(),
+                "pris", kurs.getPris(),
+                "adresse", kurs.getAdresse(),
+                "start_dato", kurs.getStart_dato().toString(),
+                "slutt_dato", kurs.getSlutt_dato().toString()
+        )).toList());
     }
     //kursfiltrering med dato og område
     public void filtrerKurs(Context ctx){
@@ -101,7 +119,11 @@ public class KursController {
 
                 resultat.add(K);
             }
+
+            System.out.println("Antall kurs funnet: " + resultat.size());
+            ctx.json(resultat);
         }
+
     }
 
 }

@@ -1,7 +1,7 @@
 package org.example;
 
 import io.javalin.Javalin;
-import Controllers.BrukerController;
+import Controllers.*;
 
 public class TestMain {
     public static void main(String[] args) {
@@ -11,6 +11,14 @@ public class TestMain {
                     "/api/bruker",
                     BrukerController::hentBruker
             );
+                    KursController kursController = new KursController();
+
+            config.routes.get(
+                    "/api/kurs",
+                    kursController::getAllKurs
+            );
+
+
         });
 
         app.start(7000);
