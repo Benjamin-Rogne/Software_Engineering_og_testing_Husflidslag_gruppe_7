@@ -537,4 +537,25 @@ a:focus-visible {
     margin: 0;
 }
 
+/* Kontakt oss: skjema */
+.kontaktskjema {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.kontaktskjema input,
+.kontaktskjema textarea,
+.kontaktskjema button {
+    padding: 10px;
+    font: inherit;
+}
+
+.kontaktskjema button {
+    width: fit-content;
+    cursor: pointer;
+}
+
+
+
 
