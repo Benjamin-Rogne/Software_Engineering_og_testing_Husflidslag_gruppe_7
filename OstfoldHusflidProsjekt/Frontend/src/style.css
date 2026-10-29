@@ -537,23 +537,61 @@ a:focus-visible {
     margin: 0;
 }
 
-/* Kontakt oss: skjema */
-.kontaktskjema {
+/* Kontakt oss */
+.kontakt {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: start;
+    padding: 60px 30px 40px 60px;
+}
+
+.kontakt-boks {
+    margin: 30px 0;
+    padding: 50px 30px;
+    background: #d8e8ec;
+    font-size: 1.15rem;
+    line-height: 1.8;
+}
+
+.kontakt a {
+    color: var(--tekst);
+    text-decoration: none;
+}
+
+.styret {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.styret li {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 20px;
+    border-bottom: 2px solid var(--graa-linje);
 }
 
-.kontaktskjema input,
-.kontaktskjema textarea,
-.kontaktskjema button {
-    padding: 10px;
-    font: inherit;
+.styret img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
-.kontaktskjema button {
-    width: fit-content;
-    cursor: pointer;
+.styret p {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.styret small {
+    font-size: 0.95rem;
+}
+
+.styret strong {
+    font-size: 1.6rem;
+    font-weight: normal;
 }
 
 

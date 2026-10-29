@@ -1,63 +1,41 @@
-import { Mail, Phone, MapPin } from "lucide-react";
-
-const adresse = "Emil Mørchs vei 25, 1653 Sellebakk";
+const styret = [
+    { rolle: "Styreleder", navn: "Mona Andersen", epost: "mona@sjokkpris.no", telefon: "91777582", bilde: "/bilder/styret/mona.jpg" },
+    { rolle: "Nestleder", navn: "Aud Kari Holme", epost: "Audkari.holme@gmail.com", telefon: "95879367", bilde: "/bilder/styret/aud-kari.jpg" },
+    { rolle: "Sekretær", navn: "Heidi Børstad", epost: "heidi.borstad@gmail.com", telefon: "95222155", bilde: "/bilder/styret/heidi.jpg" },
+    { rolle: "Nettansvarlig", navn: "Silja Devine Holhjem", epost: "siljadevine@gmail.com", telefon: "41664904", bilde: "/bilder/styret/silja.jpg" },
+    { rolle: "Styremedlem", navn: "Linda P. Vallner", epost: "lindap.vallner@gmail.com", telefon: "97638424", bilde: "/bilder/styret/linda.jpg" },
+    { rolle: "Styremedlem", navn: "Thore Grøtvedt", epost: "thoregro@gmail.com", telefon: "90135455", bilde: "/bilder/styret/thore.jpg" },
+    { rolle: "Ung Husflidskontakt", navn: "Linda P. Vallner", epost: "lindap.vallner@gmail.com", telefon: "97638424", bilde: "/bilder/styret/linda.jpg" },
+    { rolle: "Varamedlem", navn: "Julie Mari Brevik", epost: "bunad.julie@gmail.com", telefon: "99313244", bilde: "/bilder/styret/julie.jpg" },
+];
 
 export default function Kontakt() {
-    const kartUrl =
-        "https://www.google.com/maps?q=" + encodeURIComponent(adresse) + "&output=embed";
-
     return (
-        <main className="arrangement">
-            <article className="arrangement-innhold">
+        <main className="kontakt">
+            <h1>Kontakt oss</h1>
 
-              
-                <section className="kort">
-                    <h1>Kontakt oss</h1>
-                    <ul className="nokkelinfo">
-                        <li className="info-linje">
-                            <MapPin className="ikon" aria-hidden="true" />
-                            <span>
-                                <span className="stor">Østfold Husflidslag</span><br />
-                                {adresse}
-                            </span>
-                        </li>
-                        <li className="info-linje">
-                            <Mail className="ikon" aria-hidden="true" />
-                            <a href="mailto:ostfoldhusflid@gmail.com">ostfoldhusflid@gmail.com</a>
-                        </li>
-                        <li className="info-linje">
-                            <Phone className="ikon" aria-hidden="true" />
-                            <a href="tel:+4791777582">+47 917 77 582</a>
-                        </li>
-                    </ul>
-                </section>
+            <p className="kontakt-boks">
+                Mona Andersen<br />
+                Emil Mørchs vei 25, 2. etg. rom 1<br />
+                1653 SELLEBAKK<br />
+                <a href="tel:91777582">91777582</a><br />
+                <a href="mailto:ostfoldhusflid@gmail.com">ostfoldhusflid@gmail.com</a>
+            </p>
 
-                
-                <section className="kort">
-                    <h2>Send oss en melding</h2>
-                    <form className="kontaktskjema" onSubmit={(e) => e.preventDefault()}>
-                        <label htmlFor="navn">Navn</label>
-                        <input id="navn" name="navn" type="text" required />
-
-                        <label htmlFor="epost">E-post</label>
-                        <input id="epost" name="epost" type="email" required />
-
-                        <label htmlFor="melding">Melding</label>
-                        <textarea id="melding" name="melding" rows="6" required></textarea>
-
-                        <button type="submit">Send</button>
-                    </form>
-                </section>
-
-                
-                <section className="kort kart-kort">
-                    <iframe src={kartUrl} title={`Kart over ${adresse}`}></iframe>
-                </section>
-            </article>
-
-            <aside className="arrangement-bilde">
-                <img src="/bilder/hovedbilde.jpg" alt="" />
-            </aside>
+            <ul className="styret">
+                {styret.map((person) => (
+                    <li key={person.rolle + person.navn}>
+                        
+                        <p>
+                            <small>{person.rolle}</small><br />
+                            <strong>{person.navn}</strong><br />
+                            <a href={"mailto:" + person.epost}>{person.epost}</a><br />
+                            <a href={"tel:" + person.telefon}>{person.telefon}</a>
+                        </p>
+                        <img src={person.bilde} alt="" />
+                    </li>
+                ))}
+            </ul>
         </main>
     );
 }
