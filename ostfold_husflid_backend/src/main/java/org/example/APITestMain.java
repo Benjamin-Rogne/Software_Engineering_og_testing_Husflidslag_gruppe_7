@@ -12,10 +12,10 @@ public class APITestMain {
         KursController kursController = new KursController();
         Javalin app = Javalin.create(config -> {
             BrukerController.registerRoutes(config);
-            config.routes.get(
+            /*config.routes.get(
                     "/api/kurs",
-                    kursController::getAllKurs
-            );
+                    //kursController::getAllKurs
+            );*/
             config.routes.get(
                     "/api/test",ctx -> {System.out.println("test fungerer");
                         ctx.result("hei server");

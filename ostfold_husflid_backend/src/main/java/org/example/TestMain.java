@@ -11,12 +11,12 @@ public class TestMain {
                     "/api/bruker",
                     BrukerController::hentBruker
             );
-                    KursController kursController = new KursController();
+                    /*KursController kursController = new KursController();
 
             config.routes.get(
                     "/api/kurs",
                     kursController::getAllKurs
-            );
+            );*/
 
 
         });
