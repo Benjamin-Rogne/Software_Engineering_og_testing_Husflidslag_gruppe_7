@@ -1,11 +1,12 @@
 package services;
-
+import DTOs.KursDto2;
 import io.javalin.http.Context;
 import models.Kursklasse;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.List;
 
 public class KursServices {
     private ArrayList<Kursklasse> kursListe = new ArrayList<>();
@@ -81,13 +82,12 @@ public class KursServices {
     201 betyr att en objekt har blitt created
     ctx betyr forspørsel og svar
     body as class = json fra frontend om til et java objekt*/
-    public void addKurs(Context ctx){
-        Kursklasse nyttKurs = ctx.bodyAsClass(Kursklasse.class);
+    public KursDto2 addKurs(Kursklasse nyttKurs) {
         kursListe.add(nyttKurs);
-
-        ctx.status(201);
-        ctx.json(nyttKurs);
+        return new KursDto2(nyttKurs);
     }
+
+
     // henter alle kurs og koverterer til json
     /*public void getAllKurs (Context ctx){
         System.out.println("getAllKurs blir kjørt!");
@@ -96,35 +96,58 @@ public class KursServices {
         ctx.json(kursListe);
     }*/
     //ai får å finne test feil
-    public void getAllKurs(Context ctx) {
-
-        System.out.println("Antall kurs: " + kursListe.size());
-
-        ctx.json(kursListe.stream().map(kurs -> Map.of(
-                "kurs_id", kurs.getKurs_id(),
-                "tittle", kurs.getTittle(),
-                "pris", kurs.getPris(),
-                "adresse", kurs.getAdresse(),
-                "start_dato", kurs.getStart_dato().toString(),
-                "slutt_dato", kurs.getSlutt_dato().toString()
-        )).toList());
+    public List<KursDto2> getAllKurs() {
+        return kursListe.stream()
+                .map(KursDto2::new)
+                .toList();
+    }
+    public boolean slettKurs(int kursId) {
+        return kursListe.removeIf(
+                kurs -> kurs.getKurs_id() == kursId
+        );
     }
     //kursfiltrering med dato og område
-    public void filtrerKurs(Context ctx){
-        String omraade_id = ctx.queryParam("område");
-        String dato = ctx.queryParam("dato");
-        ArrayList<Kursklasse> resultat = new ArrayList<>();
-        for (Kursklasse K : kursListe){
-            boolean rOmraade = omraade_id == null || K.getOmraade_id() == Integer.parseInt(omraade_id);
-            boolean rDato = dato == null || K.getStart_dato().equals(LocalDate.parse(dato));
-            if (rDato && rOmraade) {
+    public List<KursDto2> filtrerKurs(String omraade_id, String dato) {
 
-                resultat.add(K);
+        ArrayList<KursDto2> resultat = new ArrayList<>();
+
+        for (Kursklasse kurs : kursListe) {
+
+            boolean rOmraade = omraade_id == null ||
+                    kurs.getOmraade_id() == Integer.parseInt(omraade_id);
+
+            boolean rDato = dato == null ||
+                    kurs.getStart_dato().toLocalDate()
+                            .equals(LocalDate.parse(dato));
+
+            if (rDato && rOmraade) {
+                resultat.add(new KursDto2(kurs));
             }
 
-            System.out.println("Antall kurs funnet: " + resultat.size());
-            ctx.json(resultat);
         }
 
+        return resultat;
     }
+
+    public KursDto2 redigerKurs(int kursId, Kursklasse oppdatertKurs) {
+
+        for (Kursklasse kurs : kursListe) {
+
+            if (kurs.getKurs_id() == kursId) {
+
+                kurs.setTittle(oppdatertKurs.getTittle());
+                kurs.setStart_dato(oppdatertKurs.getStart_dato());
+                kurs.setSlutt_dato(oppdatertKurs.getSlutt_dato());
+                kurs.setPris(oppdatertKurs.getPris());
+                kurs.setOmraade_id(oppdatertKurs.getOmraade_id());
+                kurs.setKursholder_id(oppdatertKurs.getKursholder_id());
+                kurs.setAdresse(oppdatertKurs.getAdresse());
+
+                return new KursDto2(kurs);
+            }
+        }
+
+        return null;
+    }
+
 }
