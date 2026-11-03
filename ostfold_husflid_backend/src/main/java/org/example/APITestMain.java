@@ -7,6 +7,7 @@ import services.KursServices;
 // test for om bruker kan laste info fra dummy DB til javalin interface med DTOs
 public class APITestMain {
 
+
     public static void main(String[] args) {
         System.out.println("test test");
 
