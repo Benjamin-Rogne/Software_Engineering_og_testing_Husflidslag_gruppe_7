@@ -118,7 +118,7 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
 
     @Override
     public void slettKurs(int kurs_id) {
-        
+
     }
 
 
