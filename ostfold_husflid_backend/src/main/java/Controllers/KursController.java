@@ -3,15 +3,15 @@ import io.javalin.http.Context;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import models.Kursklasse;
+import models.Kurs;
 public class KursController {
-    private ArrayList<Kursklasse> kursklasseListe = new ArrayList<>();
+    private ArrayList<Kurs> kursListe = new ArrayList<>();
 
     //objekter for kursliste dummydata
     public KursController() {
 
         // Kurs 1 - Halden
-        kursklasseListe.add(new Kursklasse(
+        kursListe.add(new Kurs(
                 1,
                 "Strikkekurs",
                 LocalDateTime.of(2026, 11, 20, 10, 0),
@@ -24,7 +24,7 @@ public class KursController {
         ));
 
         // Kurs 2 - Fredrikstad
-        kursklasseListe.add(new Kursklasse(
+        kursListe.add(new Kurs(
                 2,
                 "Malekurs",
                 LocalDateTime.of(2026, 12, 5, 12, 0),
@@ -37,7 +37,7 @@ public class KursController {
         ));
 
         // Kurs 3 - Sarpsborg
-        kursklasseListe.add(new Kursklasse(
+        kursListe.add(new Kurs(
                 3,
                 "Sykurs",
                 LocalDateTime.of(2026, 12, 10, 9, 0),
@@ -47,7 +47,7 @@ public class KursController {
                 2,
                 0,
                 "Sentrum, Sarpsborg"));
-                kursklasseListe.add(new Kursklasse(
+                kursListe.add(new Kurs(
                         4,
                         "Treskjæringskurs",
                         LocalDateTime.of(2026, 12, 15, 10, 0),
@@ -60,7 +60,7 @@ public class KursController {
                 ));
 
 // Kurs 5 - Fredrikstad
-        kursklasseListe.add(new Kursklasse(
+        kursListe.add(new Kurs(
                 5,
                 "Keramikkurs",
                 LocalDateTime.of(2026, 12, 18, 11, 0),
@@ -78,23 +78,23 @@ public class KursController {
     ctx betyr forspørsel og svar
     body as class = json fra frontend om til et java objekt*/
     public void addKurs(Context ctx){
-        Kursklasse nyttKursklasse = ctx.bodyAsClass(Kursklasse.class);
-        kursklasseListe.add(nyttKursklasse);
+        Kurs nyttKurs = ctx.bodyAsClass(Kurs.class);
+        kursListe.add(nyttKurs);
 
         ctx.status(201);
-        ctx.json(nyttKursklasse);
+        ctx.json(nyttKurs);
     }
     // henter alle kurs og koverterer til json
     public void getAllKurs (Context ctx){
 
-        ctx.json(kursklasseListe);
+        ctx.json(kursListe);
     }
     //kursfiltrering med dato og område
     public void filtrerKurs(Context ctx){
         String omraade_id = ctx.queryParam("område");
         String dato = ctx.queryParam("dato");
-        ArrayList<Kursklasse> resultat = new ArrayList<>();
-        for (Kursklasse K : kursklasseListe){
+        ArrayList<Kurs> resultat = new ArrayList<>();
+        for (Kurs K : kursListe){
             boolean rOmraade = omraade_id == null || K.getOmraade_id() == Integer.parseInt(omraade_id);
             boolean rDato = dato == null || K.getStart_dato().equals(LocalDate.parse(dato));
             if (rDato && rOmraade) {
