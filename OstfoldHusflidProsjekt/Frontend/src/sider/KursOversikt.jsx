@@ -1,42 +1,71 @@
-import KursKort from '../komponenter/KursKort.jsx';
-import { kursListe } from '../data/kurs.js';
-
-const omrader = [
-    "Fredrikstad", "Sarpsborg", "Moss", "Halden",
-    "Råde", "Hobøl", "Rygge", "Indre Østfold",
-];
+import { useEffect, useState } from "react";
+import KursKort from "../komponenter/KursKort.jsx";
+import { hentAlleKurs, OMRADER } from "../api/kurs.js";
 
 export default function KursOversikt() {
-    return (
-        <main className='innhold kursside'>
-            <h1>Kurs og aktiviteter</h1>
+  const [kursListe, setKursListe] = useState([]);
+  const [laster, setLaster] = useState(true);
+  const [feil, setFeil] = useState(null);
+  const [sortering, setSortering] = useState("dato");
+  const [omrade, setOmrade] = useState("");
 
-            {}
-            <section className='kurs-filtrering' aria-label='Filtrer kurs'>
-                <form onSubmit={(e) => e.preventDefault()}>
-                    <label htmlFor='sortering'>Sorter etter:</label>
-                    <select id='sortering' name='sortering'>
-                        <option value='dato'>Dato</option>
-                        <option value='pris'>Pris</option>
-                        <option value='type'>Type kurs</option>
-                    </select>
+  // Henter kursene fra backend når siden åpnes
+  useEffect(() => {
+    hentAlleKurs()
+      .then(setKursListe)
+      .catch((e) => setFeil(e.message))
+      .finally(() => setLaster(false));
+  }, []);
 
-                    <select id='omraade' name='omraade' aria-label='Område'>
-                        <option value=''>Hele Østfold</option>
-                        {omrader.map((omrade) => (
-                            <option key={omrade} value={omrade}>{omrade}</option>
-                        ))}
-                    </select>
-
-                    <button type='submit'>Sorter</button>
-                </form>
-            </section>
-
-            <section className='kurs-container' aria-label='kurs'>
-                {kursListe.map((kurs) => (
-                    <KursKort key={kurs.id} kurs={kurs} />
-                ))}
-            </section>
-        </main>
+  // Filtrer på område, deretter sorter. Gjøres i frontend inntil filtrerKurs i backend er klar.
+  const visteKurs = kursListe
+    .filter((kurs) => omrade === "" || kurs.omrade === omrade)
+    .toSorted((a, b) =>
+      sortering === "pris" ? a.pris - b.pris : a.start.localeCompare(b.start)
     );
+
+  return (
+    <main className="innhold kursside">
+      <h1>Kurs og aktiviteter</h1>
+
+      {/* oppdateres med en gang brukeren endrer et valg */}
+      <section className="kurs-filtrering" aria-label="Filtrer kurs">
+        <form onSubmit={(e) => e.preventDefault()}>
+          <label htmlFor="sortering">Sorter etter:</label>
+          <select
+            id="sortering"
+            value={sortering}
+            onChange={(e) => setSortering(e.target.value)}
+          >
+            <option value="dato">Dato</option>
+            <option value="pris">Pris</option>
+          </select>
+
+          <select
+            id="omraade"
+            aria-label="Område"
+            value={omrade}
+            onChange={(e) => setOmrade(e.target.value)}
+          >
+            <option value="">Hele Østfold</option>
+            {OMRADER.map((o) => (
+              <option key={o} value={o}>{o}</option>
+            ))}
+          </select>
+        </form>
+      </section>
+
+      {laster && <p>Henter kurs …</p>}
+      {feil && <p role="alert">{feil}. Prøv igjen senere.</p>}
+      {!laster && !feil && visteKurs.length === 0 && (
+        <p>Ingen kurs i dette området ennå.</p>
+      )}
+
+      <section className="kurs-container" aria-label="Kurs">
+        {visteKurs.map((kurs) => (
+          <KursKort key={kurs.id} kurs={kurs} />
+        ))}
+      </section>
+    </main>
+  );
 }
