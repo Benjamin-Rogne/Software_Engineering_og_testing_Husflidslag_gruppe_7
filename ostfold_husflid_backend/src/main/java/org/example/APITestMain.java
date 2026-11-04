@@ -3,6 +3,8 @@ import Controllers.KursController;
 import io.javalin.Javalin;
 import Controllers.BrukerController;
 import services.KursServices;
+import DTOs.*;
+import models.*;
 
 // test for om bruker kan laste info fra dummy DB til javalin interface med DTOs
 public class APITestMain {

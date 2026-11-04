@@ -1,9 +1,11 @@
 package Database;
 
-import models.Kurs
+import models.Kurs;
 import models.Bruker;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 
 // dummy database som inneholder bruker objecter "bruker table"
 public class DummyDatabase {

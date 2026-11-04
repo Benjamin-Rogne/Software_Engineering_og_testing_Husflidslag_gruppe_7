@@ -1,108 +1,159 @@
+
 package Controllers;
+
+import DTOs.KursDto2;
 import io.javalin.http.Context;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import models.Kursklasse;
+import models.Kurs;
+import services.KursServices;
+
+import java.util.List;
+
 public class KursController {
-    private ArrayList<Kursklasse> kursklasseListe = new ArrayList<>();
 
-    //objekter for kursliste dummydata
-    public KursController() {
+    // Kobling mellom KursController og KursServices
+    private final KursServices kursServices;
 
-        // Kurs 1 - Halden
-        kursklasseListe.add(new Kursklasse(
-                1,
-                "Strikkekurs",
-                LocalDateTime.of(2026, 11, 20, 10, 0),
-                LocalDateTime.of(2026, 11, 20, 14, 0),
-                250.0f,
-                1,
-                1,
-                0,
-                "Storgata 10, Halden"
-        ));
-
-        // Kurs 2 - Fredrikstad
-        kursklasseListe.add(new Kursklasse(
-                2,
-                "Malekurs",
-                LocalDateTime.of(2026, 12, 5, 12, 0),
-                LocalDateTime.of(2026, 12, 5, 16, 0),
-                300.0f,
-                2,
-                1,
-                0,
-                "Sentrum, Fredrikstad"
-        ));
-
-        // Kurs 3 - Sarpsborg
-        kursklasseListe.add(new Kursklasse(
-                3,
-                "Sykurs",
-                LocalDateTime.of(2026, 12, 10, 9, 0),
-                LocalDateTime.of(2026, 12, 10, 13, 0),
-                200.0f,
-                3,
-                2,
-                0,
-                "Sentrum, Sarpsborg"));
-                kursklasseListe.add(new Kursklasse(
-                        4,
-                        "Treskjæringskurs",
-                        LocalDateTime.of(2026, 12, 15, 10, 0),
-                        LocalDateTime.of(2026, 12, 15, 15, 0),
-                        350.0f,
-                        4,
-                        2,
-                        0,
-                        "Moss sentrum"
-                ));
-
-// Kurs 5 - Fredrikstad
-        kursklasseListe.add(new Kursklasse(
-                5,
-                "Keramikkurs",
-                LocalDateTime.of(2026, 12, 18, 11, 0),
-                LocalDateTime.of(2026, 12, 18, 16, 0),
-                450.0f,
-                2,
-                1,
-                0,
-                "Fredrikstad sentrum"
-        ));
+    // Mottar KursServices fra APITestMain
+    public KursController(KursServices kursServices) {
+        this.kursServices = kursServices;
     }
-    /*fungerer så lenge serveren eller koden er aktiv, vil bli tom ver gang man starter om server
-     legger til kurs fra json
-    201 betyr att en objekt har blitt created
-    ctx betyr forspørsel og svar
-    body as class = json fra frontend om til et java objekt*/
-    public void addKurs(Context ctx){
-        Kursklasse nyttKursklasse = ctx.bodyAsClass(Kursklasse.class);
-        kursklasseListe.add(nyttKursklasse);
+
+    /*
+      Henter alle kurs fra KursServices.
+      ctx betyr forespørsel og svar.
+      ctx.json konverterer resultatet til JSON
+      som sendes videre til frontend.
+     */
+    public void getAllKurs(Context ctx) {
+
+        List<KursDto2> kursListe =
+                kursServices.getAllKurs();
+
+        ctx.json(kursListe);
+    }
+
+    /*
+      Legger til et nytt kurs fra JSON.
+      bodyAsClass konverterer JSON fra frontend
+      til et Java-objekt av typen Kurs.
+      Sender objektet videre til KursServices,
+      som legger det til i kurslisten.
+      201 betyr at et nytt objekt har blitt opprettet.
+     */
+    public void addKurs(Context ctx) {
+
+        Kurs nyttKurs = ctx.bodyAsClass(Kurs.class);
+
+        KursDto2 resultat =
+                kursServices.addKurs(nyttKurs);
 
         ctx.status(201);
-        ctx.json(nyttKursklasse);
+        ctx.json(resultat);
     }
-    // henter alle kurs og koverterer til json
-    public void getAllKurs (Context ctx){
 
-        ctx.json(kursklasseListe);
-    }
-    //kursfiltrering med dato og område
-    public void filtrerKurs(Context ctx){
+    /*
+      Kursfiltrering med dato og område.
+      Henter verdiene fra URL-en med queryParam.
+      Hvis område eller dato ikke er oppgitt,
+      filtrerer vi ikke på den verdien.
+      Sender verdiene videre til KursServices.
+     */
+    public void filtrerKurs(Context ctx) {
+
         String omraade_id = ctx.queryParam("område");
         String dato = ctx.queryParam("dato");
-        ArrayList<Kursklasse> resultat = new ArrayList<>();
-        for (Kursklasse K : kursklasseListe){
-            boolean rOmraade = omraade_id == null || K.getOmraade_id() == Integer.parseInt(omraade_id);
-            boolean rDato = dato == null || K.getStart_dato().equals(LocalDate.parse(dato));
-            if (rDato && rOmraade) {
 
-                resultat.add(K);
-            }
+        try {
+
+            List<KursDto2> resultat =
+                    kursServices.filtrerKurs(omraade_id, dato);
+
+            ctx.json(resultat);
+
+        } catch (IllegalArgumentException e) {
+
+            // 400 betyr ugyldig forespørsel
+            ctx.status(400);
+            ctx.result("Ugyldig område eller dato");
         }
     }
 
+    /*
+      Sletter et kurs basert på kurs-ID.
+      pathParam henter ID fra URL-en.
+      Sender ID videre til KursServices,
+      som finner og sletter kurset.
+      204 betyr at kurset ble slettet.
+      404 betyr at kurset ikke finnes.
+      400 betyr at kurs-ID er ugyldig.
+     */
+    public void slettKurs(Context ctx) {
+
+        try {
+
+            int kursId = Integer.parseInt(
+                    ctx.pathParam("id"));
+
+            boolean slettet =
+                    kursServices.slettKurs(kursId);
+
+            if (slettet) {
+
+                ctx.status(204);
+
+            } else {
+
+                ctx.status(404);
+                ctx.result("Fant ikke kurset");
+            }
+
+        } catch (NumberFormatException e) {
+
+            ctx.status(400);
+            ctx.result("Ugyldig kurs-ID");
+        }
+    }
+
+    /* Redigerer et eksisterende kurs.
+      Henter kurs-ID fra URL-en.
+      bodyAsClass konverterer JSON fra frontend
+      til et Java-objekt av typen Kurs.
+      Sender kurs-ID og det oppdaterte objektet
+      videre til KursServices.
+      Returnerer oppdatert kurs som JSON.
+      404 betyr at kurset ikke finnes.
+      400 betyr at kurs-ID er ugyldig.
+     */
+    public void redigerKurs(Context ctx) {
+
+        try {
+
+            int kursId = Integer.parseInt(
+                    ctx.pathParam("id"));
+
+            Kurs oppdatertKurs =
+                    ctx.bodyAsClass(Kurs.class);
+
+            KursDto2 resultat =
+                    kursServices.redigerKurs(
+                            kursId, oppdatertKurs);
+
+            if (resultat != null) {
+
+                ctx.json(resultat);
+
+            } else {
+
+                ctx.status(404);
+                ctx.result("Fant ikke kurset");
+            }
+
+        } catch (NumberFormatException e) {
+
+            ctx.status(400);
+            ctx.result("Ugyldig kurs-ID");
+        }
+    }
 }
+
 
