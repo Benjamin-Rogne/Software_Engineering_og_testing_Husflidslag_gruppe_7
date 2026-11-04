@@ -1,6 +1,6 @@
 package DTOs;
 import java.time.format.DateTimeFormatter;
-import models.Kursklasse;
+import models.Kurs;
 
 public class KursDto2 {
 
@@ -14,7 +14,7 @@ public class KursDto2 {
         private int paamelding_id;
         private String adresse;
 
-        public KursDto2(Kursklasse kurs) {
+        public KursDto2(Kurs kurs) {
 
             DateTimeFormatter formatter =
                     DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

@@ -2,7 +2,7 @@ package models;
 
 import java.time.LocalDateTime;
 
-public class Kursklasse {
+public class Kurs {
     int kurs_id;
     String tittle;
     LocalDateTime start_dato;
@@ -13,7 +13,7 @@ public class Kursklasse {
     int paamelding_id;
     String adresse;
 
-    public Kursklasse(int kurs_id, String tittle, LocalDateTime start_dato, LocalDateTime slutt_dato, float pris, int omraade_id, int kursholder_id, int paamelding_paamelding_id, String adresse) {
+    public Kurs(int kurs_id, String tittle, LocalDateTime start_dato, LocalDateTime slutt_dato, float pris, int omraade_id, int kursholder_id, int paamelding_paamelding_id, String adresse) {
         this.kurs_id = kurs_id;
         this.tittle = tittle;
         this.start_dato = start_dato;
