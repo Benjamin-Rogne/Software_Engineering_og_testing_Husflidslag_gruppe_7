@@ -5,6 +5,8 @@ import Forside from './sider/Forside.jsx';
 import KursOversikt from './sider/KursOversikt.jsx';
 import KursInfo from './sider/KursInfo.jsx'
 import IkkeFunnet from './sider/IkkeFunnet.jsx';
+import Kontakt from './sider/Kontakt.jsx';
+import Aktuelt from "./sider/Aktuelt";
 
 
 export default function App() {
@@ -14,8 +16,10 @@ export default function App() {
     <Routes>
       <Route path='/' element={<Forside />} />
       <Route path='/kurs' element={<KursOversikt />} />
+      <Route path='/kontakt' element={<Kontakt />} />
       <Route path='/kurs/:id' element={<KursInfo />} />
       <Route path='*' element={<IkkeFunnet />} />
+      <Route path='/aktuelt' element={<Aktuelt />} />
     </Routes>
     <Bunntekst />
     </>
