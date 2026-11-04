@@ -40,8 +40,9 @@ public class BrukerController {
 package Controllers;
 
 import DTOs.BrukerDTO;
+import DTOs.OpprettBrukerDTO;
 import services.BrukerService;
-
+import DTOs.OppdaterBrukerDTO;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
 
@@ -63,6 +64,19 @@ public class BrukerController {
         config.routes.get(
                 "/api/brukere/{id}",
                 BrukerController::hentBruker
+        );
+        config.routes.post(
+                "/api/brukere",
+                BrukerController::opprettBruker
+        );
+        config.routes.put(
+                "/api/brukere/{id}",
+                BrukerController::oppdaterBruker
+        );
+
+        config.routes.delete(
+                "/api/brukere/{id}",
+                BrukerController::slettBruker
         );
     }
 
@@ -88,6 +102,44 @@ public class BrukerController {
             ctx.json(bruker.get());
         } else {
             ctx.status(404).result("Bruker finnes ikke");
+        }
+
+    }
+    public static void opprettBruker(Context ctx) {
+
+        try {
+            OpprettBrukerDTO dto =
+                    ctx.bodyAsClass(OpprettBrukerDTO.class);
+
+            BrukerDTO opprettet =
+                    service.opprettBruker(dto);
+
+            ctx.status(201).json(opprettet);
+
+        } catch (IllegalArgumentException e) {
+            ctx.status(400).result(e.getMessage());
+        }
+    }
+    public static void oppdaterBruker(Context ctx) {
+        int id = Integer.parseInt(ctx.pathParam("id"));
+
+        OppdaterBrukerDTO dto =
+                ctx.bodyAsClass(OppdaterBrukerDTO.class);
+
+        service.oppdaterBruker(id, dto)
+                .ifPresentOrElse(
+                        bruker -> ctx.json(bruker),
+                        () -> ctx.status(404)
+                );
+    }
+
+    public static void slettBruker(Context ctx) {
+        int id = Integer.parseInt(ctx.pathParam("id"));
+
+        if (service.slettBruker(id)) {
+            ctx.status(204);
+        } else {
+            ctx.status(404);
         }
     }
 }
