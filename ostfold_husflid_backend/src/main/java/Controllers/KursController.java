@@ -154,6 +154,10 @@ public class KursController {
             ctx.result("Ugyldig kurs-ID");
         }
     }
+
+    
+
+
 }
 
 

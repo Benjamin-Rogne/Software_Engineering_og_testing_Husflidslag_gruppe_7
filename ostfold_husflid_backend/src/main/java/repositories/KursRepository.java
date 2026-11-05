@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class KursRepository implements KursRepositoryInterface { // Bruk implements også her!
+public class KursRepository {
 
-    @Override
+
     public List<Kurs> hentAlleKurs() {
         List<Kurs> kursListe = new ArrayList<>();
         String sql = "SELECT kurs_id, tittle, start_dato, slutt_dato, pris, omraade_id, kursholder_id, paamelding_id, adresse FROM kurs";
@@ -20,7 +20,15 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
                 ResultSet rs = stmt.executeQuery()
         ) {
             while (rs.next()) {
-                // Hent ut data fra databasen...
+                rs.getInt("kurs_id");
+                rs.getString("tittel");
+                rs.getDate("start_dato");
+                rs.getDate("slutt_dato");
+                rs.getDouble("pris");
+                rs.getInt("omraade_id");
+                rs.getInt("kursholder_id");
+                rs.getInt("paamelding_id");
+                rs.getString("adresse");
             }
         } catch (SQLException e) {
             throw new RuntimeException("Kunne ikke hente kurs", e);
@@ -28,7 +36,7 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
         return kursListe;
     }
 
-    @Override
+
     public Optional<Kurs> hentKurs(int kurs_id) {
         String sql = "SELECT * FROM kurs WHERE kurs_id = ?";
         try (
@@ -58,7 +66,7 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
         return Optional.empty();
     }
 
-    @Override
+
     public List<Kurs> hentKursEtterOmraade(int omraade_id) {
         List<Kurs> kursListe = new ArrayList<>();
         String sql = "SELECT * FROM kurs WHERE omraade_id = ?";
@@ -84,12 +92,12 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Kunne ikke hente kurs for område_id: " + omraade_id, e);
+            throw new RuntimeException("Kunne ikke hente kurs for område: " + omraade_id, e);
         }
         return kursListe;
     }
 
-    @Override
+
     public void leggTilKurs(Kurs nyttKurs) {
         String sql = "INSERT INTO kurs (tittle, start_dato, slutt_dato, pris, omraade_id, kursholder_id, paamelding_id, adresse) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (
@@ -111,12 +119,12 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
         }
     }
 
-    @Override
+
     public void oppdaterKurs(int kurs_id, Kurs oppdatertKurs) {
 
     }
 
-    @Override
+
     public void slettKurs(int kurs_id) {
 
     }
