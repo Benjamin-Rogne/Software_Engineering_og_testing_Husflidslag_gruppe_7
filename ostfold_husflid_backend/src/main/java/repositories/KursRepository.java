@@ -21,14 +21,11 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
         kurs.setPris(rs.getFloat("Pris"));
         kurs.setOmraade_id(rs.getInt("idOmraade"));
         kurs.setKursholder_id(rs.getInt("idKursholder"));
-
+        kurs.setBilde(rs.getString("Bilde"));
         int adresseId = rs.getInt("adresse_id");
         if (!rs.wasNull()) {
             kurs.setAdresse_id(adresseId);
         }
-
-        //kurs.setBilde(rs.getString("Bilde"));
-
         return kurs;
     }
 
