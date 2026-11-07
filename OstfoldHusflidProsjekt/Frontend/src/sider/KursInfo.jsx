@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router";
 import { Calendar, Clock, MapPin } from "lucide-react";
 import { hentKurs } from "../api/kurs.js";
 import { formaterDato, formaterKlokkeslett } from "../formatering/dato.js";
+import Pamelding from "../komponenter/Pamelding.jsx";
 
 // Én side for alle kurs. Hvilket kurs som vises styres av id-en i adressen (/kurs/1).
 export default function KursInfo() {
@@ -71,6 +72,15 @@ export default function KursInfo() {
           <p><strong>Pris:</strong> {kurs.pris} kr</p>
           <p><strong>Område:</strong> {kurs.omrade}</p>
         </section>
+        
+        {/* Påmelding */}
+        <section className="kort">
+          <h2>Påmelding</h2>
+          <Pamelding kursNavn={kurs.tittel} />
+        </section>
+
+
+
 
         {/* Kart */}
         <section className="kort kart-kort">
