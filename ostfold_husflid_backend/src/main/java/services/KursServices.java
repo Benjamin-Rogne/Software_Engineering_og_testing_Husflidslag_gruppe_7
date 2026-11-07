@@ -5,9 +5,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import Database.DummyDatabase;
+import repositories.KursRepository;
+import repositories.KursRepositoryInterface;
 
 public class KursServices {
-    private final List<Kurs> kursListe = DummyDatabase.kursListe;
+    //private final List<Kurs> kursListe = DummyDatabase.kursListe;
+    private final KursRepositoryInterface repository =
+            new KursRepository();
 
     //objekter for kursliste dummydata
 
@@ -18,7 +22,7 @@ public class KursServices {
     ctx betyr forspørsel og svar
     body as class = json fra frontend om til et java objekt*/
     public KursDto2 addKurs(Kurs nyttKurs) {
-        kursListe.add(nyttKurs);
+        repository.leggTilKurs(nyttKurs);
         return new KursDto2(nyttKurs);
     }
 
@@ -32,19 +36,26 @@ public class KursServices {
     }*/
     //ai får å finne test feil
     public List<KursDto2> getAllKurs() {
-        return kursListe.stream()
+        return repository.hentAlleKurs()
+                .stream()
                 .map(KursDto2::new)
                 .toList();
     }
+
     public boolean slettKurs(int kursId) {
-        return kursListe.removeIf(
-                kurs -> kurs.getKurs_id() == kursId
-        );
+        if (repository.hentKurs(kursId).isEmpty()) {
+            return false;
+        }
+
+        repository.slettKurs(kursId);
+        return true;
     }
+
     //kursfiltrering med dato og område
     public List<KursDto2> filtrerKurs(String omraade_id, String dato) {
 
-        ArrayList<KursDto2> resultat = new ArrayList<>();
+        List<Kurs> kursListe = repository.hentAlleKurs();
+        List<KursDto2> resultat = new ArrayList<>();
 
         for (Kurs kurs : kursListe) {
 
@@ -66,23 +77,14 @@ public class KursServices {
 
     public KursDto2 redigerKurs(int kursId, Kurs oppdatertKurs) {
 
-        for (Kurs kurs : kursListe) {
-
-            if (kurs.getKurs_id() == kursId) {
-
-                kurs.setTittle(oppdatertKurs.getTittle());
-                kurs.setStart_dato(oppdatertKurs.getStart_dato());
-                kurs.setSlutt_dato(oppdatertKurs.getSlutt_dato());
-                kurs.setPris(oppdatertKurs.getPris());
-                kurs.setOmraade_id(oppdatertKurs.getOmraade_id());
-                kurs.setKursholder_id(oppdatertKurs.getKursholder_id());
-                kurs.setAdresse_id(oppdatertKurs.getAdresse_id());
-
-                return new KursDto2(kurs);
-            }
+        if (repository.hentKurs(kursId).isEmpty()) {
+            return null;
         }
 
-        return null;
-    }
+        repository.oppdaterKurs(kursId, oppdatertKurs);
 
+        return repository.hentKurs(kursId)
+                .map(KursDto2::new)
+                .orElse(null);
+    }
 }

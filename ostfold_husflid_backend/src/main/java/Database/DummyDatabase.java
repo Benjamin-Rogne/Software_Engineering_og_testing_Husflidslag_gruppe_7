@@ -16,7 +16,7 @@ public class DummyDatabase {
                     new Bruker("Kari Hansen", "kari@epost.no","io456gjk", "bruker"),
                     new Bruker("Per Olsen", "per@epost.no","ioghj687jk", "bruker")
             ));
-
+/*
     public static final List<Kurs> kursListe = Arrays.asList(
             new Kurs(1, "Bunadsøm - Østfoldbunad", LocalDateTime.of(2026, 9, 1, 18, 0), LocalDateTime.of(2026, 11, 15, 21, 0), 2500.0f, 101, 1, 501, "Kirkegata 12, 1530 Moss"),
             new Kurs(2, "Treskjæring og trearbeid", LocalDateTime.of(2026, 9, 5, 17, 30), LocalDateTime.of(2026, 10, 24, 20, 30), 1800.0f, 102, 2, 502, "Storgata 45, 1607 Fredrikstad"),
@@ -29,5 +29,7 @@ public class DummyDatabase {
             new Kurs(9, "Metallsløyd og enklere smedarbeid", LocalDateTime.of(2026, 10, 15, 17, 0), LocalDateTime.of(2026, 12, 3, 20, 0), 2800.0f, 102, 9, 509, "Gamlebyen 2, 1632 Fredrikstad"),
             new Kurs(10, "Tekstilredning og ombruk av ull", LocalDateTime.of(2026, 10, 20, 18, 0), LocalDateTime.of(2026, 11, 24, 21, 0), 1400.0f, 103, 10, 510, "Tuneveien 11, 1710 Sarpsborg")
     );
+
+ */
 
 }

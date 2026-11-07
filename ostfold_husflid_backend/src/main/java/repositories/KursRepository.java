@@ -9,10 +9,33 @@ import java.util.Optional;
 
 public class KursRepository implements KursRepositoryInterface { // Bruk implements også her!
 
+    private Kurs mapKurs(ResultSet rs) throws SQLException {
+        Kurs kurs = new Kurs();
+
+        kurs.setKurs_id(rs.getInt("idKurs"));
+        kurs.setTittle(rs.getString("Tittel"));
+        //kurs.setBeskrivelse(rs.getString("Beskrivelse"));
+        kurs.setStart_dato(rs.getTimestamp("StartDato").toLocalDateTime());
+        kurs.setSlutt_dato(rs.getTimestamp("SluttDato").toLocalDateTime());
+        //kurs.setSted(rs.getString("Sted"));
+        kurs.setPris(rs.getFloat("Pris"));
+        kurs.setOmraade_id(rs.getInt("idOmraade"));
+        kurs.setKursholder_id(rs.getInt("idKursholder"));
+
+        int adresseId = rs.getInt("adresse_id");
+        if (!rs.wasNull()) {
+            kurs.setAdresse_id(adresseId);
+        }
+
+        //kurs.setBilde(rs.getString("Bilde"));
+
+        return kurs;
+    }
+
     @Override
     public List<Kurs> hentAlleKurs() {
         List<Kurs> kursListe = new ArrayList<>();
-        String sql = "SELECT kurs_id, tittle, start_dato, slutt_dato, pris, omraade_id, kursholder_id, paamelding_id, adresse FROM kurs";
+        String sql = "SELECT * FROM kurs";
 
         try (
                 Connection conn = DatabaseConnection.getConnection();
@@ -20,6 +43,7 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
                 ResultSet rs = stmt.executeQuery()
         ) {
             while (rs.next()) {
+                kursListe.add(mapKurs(rs));
                 // Hent ut data fra databasen...
             }
         } catch (SQLException e) {
@@ -30,7 +54,7 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
 
     @Override
     public Optional<Kurs> hentKurs(int kurs_id) {
-        String sql = "SELECT * FROM kurs WHERE kurs_id = ?";
+        String sql = "SELECT * FROM kurs WHERE idKurs = ?";
         try (
                 Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)
@@ -38,6 +62,9 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
             stmt.setInt(1, kurs_id);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
+                    return Optional.of(mapKurs(rs));
+
+                    /*
                     Kurs kurs = new Kurs(
                             rs.getInt("kurs_id"),
                             rs.getString("tittle"),
@@ -47,9 +74,11 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
                             rs.getInt("omraade_id"),
                             rs.getInt("kursholder_id"),
                             rs.getInt("paamelding_id"),
-                            rs.getString("adresse")
+                            rs.getInt("adresse")
                     );
                     return Optional.of(kurs);
+
+                     */
                 }
             }
         } catch (SQLException e) {
@@ -61,7 +90,7 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
     @Override
     public List<Kurs> hentKursEtterOmraade(int omraade_id) {
         List<Kurs> kursListe = new ArrayList<>();
-        String sql = "SELECT * FROM kurs WHERE omraade_id = ?";
+        String sql = "SELECT * FROM kurs WHERE idOmraade = ?";
         try (
                 Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)
@@ -69,6 +98,9 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
             stmt.setInt(1, omraade_id);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
+                    kursListe.add(mapKurs(rs));
+
+                    /*
                     Kurs kurs = new Kurs(
                             rs.getInt("kurs_id"),
                             rs.getString("tittle"),
@@ -78,9 +110,11 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
                             rs.getInt("omraade_id"),
                             rs.getInt("kursholder_id"),
                             rs.getInt("paamelding_id"),
-                            rs.getString("adresse")
+                            rs.getInt("adresse")
                     );
                     kursListe.add(kurs);
+
+                     */
                 }
             }
         } catch (SQLException e) {
@@ -91,7 +125,7 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
 
     @Override
     public void leggTilKurs(Kurs nyttKurs) {
-        String sql = "INSERT INTO kurs (tittle, start_dato, slutt_dato, pris, omraade_id, kursholder_id, paamelding_id, adresse) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO kurs (Tittel, Beskrivelse, StartDato, SluttDato, Sted, Pris, idOmraade, idKursholder, adresse_id, Bilde) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (
                 Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)
@@ -103,7 +137,7 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
             stmt.setInt(5, nyttKurs.getOmraade_id());
             stmt.setInt(6, nyttKurs.getKursholder_id());
             stmt.setInt(7, nyttKurs.getPaamelding_id());
-            stmt.setString(8, nyttKurs.getAdresse_id());
+            stmt.setInt(8, nyttKurs.getAdresse_id());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
