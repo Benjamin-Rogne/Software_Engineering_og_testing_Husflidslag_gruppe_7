@@ -14,6 +14,9 @@ const OMRADE_NAVN = {
   4: "Moss",
 };
 
+// Bildemappe definert
+const BILDE_MAPPE = "/bilder/";
+
 // Finner områdenavnet. Er id-en ukjent, letes det etter byen i adressen.
 function finnOmrade(kurs) {
   return (
@@ -38,7 +41,7 @@ function tilFrontend(kurs) {
     start: tilDatoTid(kurs.start_dato),
     slutt: tilDatoTid(kurs.slutt_dato),
     omrade: finnOmrade(kurs),
-    bilde: "/bilder/kurs.jpg", // backend har ikke bilder ennå
+    bilde: kurs.bilde ? `${BILDE_MAPPE}${kurs.bilde}.jpg` : null,
   };
 }
 
