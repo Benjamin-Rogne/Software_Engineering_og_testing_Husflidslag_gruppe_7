@@ -1,11 +1,8 @@
 package services;
 import DTOs.KursDto2;
-import io.javalin.http.Context;
 import models.Kurs;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.List;
 import Database.DummyDatabase;
 
@@ -79,7 +76,7 @@ public class KursServices {
                 kurs.setPris(oppdatertKurs.getPris());
                 kurs.setOmraade_id(oppdatertKurs.getOmraade_id());
                 kurs.setKursholder_id(oppdatertKurs.getKursholder_id());
-                kurs.setAdresse(oppdatertKurs.getAdresse());
+                kurs.setAdresse_id(oppdatertKurs.getAdresse_id());
 
                 return new KursDto2(kurs);
             }

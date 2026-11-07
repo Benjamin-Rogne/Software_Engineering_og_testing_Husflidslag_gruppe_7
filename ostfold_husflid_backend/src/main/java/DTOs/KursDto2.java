@@ -29,7 +29,7 @@ public class KursDto2 {
             this.omraade_id = kurs.getOmraade_id();
             this.kursholder_id = kurs.getKursholder_id();
             this.paamelding_id = kurs.getPaamelding_id();
-            this.adresse = kurs.getAdresse();
+            this.adresse = kurs.getAdresse_id();
         }
 
         public int getKurs_id() {

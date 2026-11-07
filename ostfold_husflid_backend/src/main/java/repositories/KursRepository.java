@@ -103,7 +103,7 @@ public class KursRepository implements KursRepositoryInterface { // Bruk impleme
             stmt.setInt(5, nyttKurs.getOmraade_id());
             stmt.setInt(6, nyttKurs.getKursholder_id());
             stmt.setInt(7, nyttKurs.getPaamelding_id());
-            stmt.setString(8, nyttKurs.getAdresse());
+            stmt.setString(8, nyttKurs.getAdresse_id());
 
             stmt.executeUpdate();
         } catch (SQLException e) {

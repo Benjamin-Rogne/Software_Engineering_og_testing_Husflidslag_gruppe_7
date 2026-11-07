@@ -11,9 +11,9 @@ public class Kurs {
     int omraade_id;
     int kursholder_id;
     int paamelding_id;
-    String adresse;
+    String adresse_id;
 
-    public Kurs(int kurs_id, String tittle, LocalDateTime start_dato, LocalDateTime slutt_dato, float pris, int omraade_id, int kursholder_id, int paamelding_paamelding_id, String adresse) {
+    public Kurs(int kurs_id, String tittle, LocalDateTime start_dato, LocalDateTime slutt_dato, float pris, int omraade_id, int kursholder_id, int paamelding_paamelding_id, String adresse_id) {
         this.kurs_id = kurs_id;
         this.tittle = tittle;
         this.start_dato = start_dato;
@@ -22,7 +22,7 @@ public class Kurs {
         this.omraade_id = omraade_id;
         this.kursholder_id = kursholder_id;
         this.paamelding_id = paamelding_paamelding_id;
-        this.adresse = adresse;
+        this.adresse_id = adresse_id;
     }
 
 
@@ -90,12 +90,12 @@ public class Kurs {
         this.paamelding_id = paamelding_id;
     }
 
-    public String getAdresse() {
-        return adresse;
+    public String getAdresse_id() {
+        return adresse_id;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public void setAdresse_id(String adresse_id) {
+        this.adresse_id = adresse_id;
     }
 }
 
