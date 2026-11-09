@@ -17,7 +17,7 @@ public class Kurs {
     int adresse_id;
     private String bilde;
 
-    // Konstruktør med adresse som String
+    // med adresse som String
     public Kurs(int kurs_id, String tittle, LocalDateTime start_dato,
                 LocalDateTime slutt_dato, float pris, int omraade_id,
                 int kursholder_id, int paamelding_paamelding_id,
@@ -34,7 +34,7 @@ public class Kurs {
         this.adresse = adresse;
     }
 
-    // Konstruktør med adresse_id
+    // med adresse_id
     public Kurs(int kurs_id, String tittle, LocalDateTime start_dato,
                 LocalDateTime slutt_dato, float pris, int omraade_id,
                 int kursholder_id, int paamelding_paamelding_id,
