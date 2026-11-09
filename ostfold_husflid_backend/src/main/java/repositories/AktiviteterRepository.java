@@ -47,4 +47,16 @@ public class AktiviteterRepository implements AktiviteterRepositoryInterface {
     public void slettAktivitet(int aktivitet_id) {
         alleAktiviteter.removeIf(a -> a.getAktivitet_id() == aktivitet_id);
     }
+
+
+    public void oppdaterAktivitet(int aktivitet_id, Aktiviteter aktivitet) {
+        for (int i = 0; i < alleAktiviteter.size(); i++) {
+            if (alleAktiviteter.get(i).getAktivitet_id() == aktivitet_id) {
+                aktivitet.setAktivitet_id(aktivitet_id);
+                alleAktiviteter.set(i, aktivitet);
+                return;
+            }
+        }
+    }
+
 }

@@ -33,4 +33,15 @@ public class NyheterRepository implements NyheterRepositoryInterface {
         public void slettNyhet(int nyhet_id) {
             alleNyheter.removeIf(n -> n.getNyhet_id() == nyhet_id);
         }
+
+        public void oppdaterNyhet(int nyhet_id, Nyhet nyhet) {
+            for (int i = 0; i < alleNyheter.size(); i++) {
+                if (alleNyheter.get(i).getNyhet_id() == nyhet_id) {
+                    nyhet.setNyhet_id(nyhet_id);
+                    alleNyheter.set(i, nyhet);
+                    return;
+            }
+        }
     }
+    }
+
