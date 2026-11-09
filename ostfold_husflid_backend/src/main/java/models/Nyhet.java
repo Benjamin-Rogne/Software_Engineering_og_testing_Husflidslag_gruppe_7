@@ -1,4 +1,7 @@
+package models;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Nyhet {
     int Nyhet_id;
@@ -20,6 +23,9 @@ public class Nyhet {
         this.omraade_id = omraade_id;
         this.brukere_id = brukere_id;
 
+    }
+
+    public Nyhet(int nyhetId, String oppdateringPåNettsiden, String tekst, LocalDateTime localDateTime) {
     }
 
     public int getNyhet_id() {
