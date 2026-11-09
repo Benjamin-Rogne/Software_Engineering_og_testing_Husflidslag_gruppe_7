@@ -1,6 +1,5 @@
 package DTOs;
 
-import java.time.LocalDate;
 
 public class AktivitetDTO {
 
@@ -8,11 +7,11 @@ public class AktivitetDTO {
     private String tittle;
     private String bilde;
     private String beskrivelse;
-    private LocalDate dato;
+    private String dato;
     private int omraade_id;
 
 
-    public AktivitetDTO(int aktivitet_id, String tittle, String bilde, String beskrivelse, LocalDate dato, int omraade_id) {
+    public AktivitetDTO(int aktivitet_id, String tittle, String bilde, String beskrivelse, String dato, int omraade_id) {
         this.aktivitet_id = aktivitet_id;
         this.tittle = tittle;
         this.bilde = bilde;
@@ -57,11 +56,11 @@ public class AktivitetDTO {
         this.beskrivelse = beskrivelse;
     }
 
-    public LocalDate getDato() {
+    public String getDato() {
         return dato;
     }
 
-    public void setDato(LocalDate dato) {
+    public void setDato(String dato) {
         this.dato = dato;
     }
 

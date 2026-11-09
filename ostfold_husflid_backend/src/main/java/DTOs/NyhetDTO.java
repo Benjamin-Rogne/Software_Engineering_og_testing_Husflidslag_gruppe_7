@@ -1,6 +1,5 @@
-package DTOs;
 
-import java.time.LocalDate;
+package DTOs;
 
 public class NyhetDTO {
 
@@ -8,12 +7,16 @@ public class NyhetDTO {
     private String tittle;
     private String tekst;
     private String bilde;
-    private LocalDate date;
+    private String date;
     private int omraade_id;
     private int brukere_id;
 
-    public NyhetDTO(int nyhet_id, String tittle, String tekst, String bilde, LocalDate date, int omraade_id, int brukere_id) {
-        Nyhet_id = nyhet_id;
+    public NyhetDTO() {
+    }
+
+    public NyhetDTO(int nyhet_id, String tittle, String tekst,
+                    String bilde, String date, int omraade_id, int brukere_id) {
+        this.Nyhet_id = nyhet_id;
         this.tittle = tittle;
         this.tekst = tekst;
         this.bilde = bilde;
@@ -22,16 +25,12 @@ public class NyhetDTO {
         this.brukere_id = brukere_id;
     }
 
-
-    public NyhetDTO() {
-    }
-
     public int getNyhet_id() {
         return Nyhet_id;
     }
 
     public void setNyhet_id(int nyhet_id) {
-        Nyhet_id = nyhet_id;
+        this.Nyhet_id = nyhet_id;
     }
 
     public String getTittle() {
@@ -58,11 +57,11 @@ public class NyhetDTO {
         this.bilde = bilde;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -81,8 +80,6 @@ public class NyhetDTO {
     public void setBrukere_id(int brukere_id) {
         this.brukere_id = brukere_id;
     }
-
-
     @Override
     public String toString() {
         return "NyhetDTO{" +
@@ -96,3 +93,6 @@ public class NyhetDTO {
                 '}';
     }
 }
+
+
+

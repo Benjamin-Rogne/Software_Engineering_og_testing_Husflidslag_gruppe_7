@@ -1,21 +1,26 @@
 
 package Controllers;
 
+import DTOs.NyhetDTO;
 import io.javalin.http.Context;
-import models.Nyhet;
 import services.NyhetService;
 
 public class NyhetController {
 
-    private static final NyhetService nyhetServices = new NyhetService();
+    private static final NyhetService nyhetService =
+            new NyhetService();
 
+    // Henter alle nyheter
     public static void getAllNyheter(Context ctx) {
-        ctx.json(nyhetServices.getAllNyheter());
+        ctx.json(nyhetService.getAllNyheter());
     }
 
+    // Henter en nyhet
     public static void hentNyhet(Context ctx) {
+
         int id = Integer.parseInt(ctx.pathParam("id"));
-        Nyhet nyhet = nyhetServices.hentNyhet(id);
+
+        NyhetDTO nyhet = nyhetService.hentNyhet(id);
 
         if (nyhet != null) {
             ctx.json(nyhet);
@@ -24,27 +29,35 @@ public class NyhetController {
         }
     }
 
+    // Legger til nyhet
     public static void addNyhet(Context ctx) {
-        Nyhet nyhet = ctx.bodyAsClass(Nyhet.class);
-        nyhetServices.addNyhet(nyhet);
-        ctx.status(201).json(nyhet);
+
+        NyhetDTO dto = ctx.bodyAsClass(NyhetDTO.class);
+
+        nyhetService.addNyhet(dto);
+
+        ctx.status(201).result("Nyhet lagt til");
     }
 
+    // Oppdaterer nyhet
     public static void oppdaterNyhet(Context ctx) {
-        int id = Integer.parseInt(ctx.pathParam("id"));
-        Nyhet nyhet = ctx.bodyAsClass(Nyhet.class);
 
-        if (nyhetServices.oppdaterNyhet(id, nyhet)) {
-            ctx.status(200).json(nyhet);
+        int id = Integer.parseInt(ctx.pathParam("id"));
+        NyhetDTO dto = ctx.bodyAsClass(NyhetDTO.class);
+
+        if (nyhetService.oppdaterNyhet(id, dto)) {
+            ctx.status(200).result("Nyhet oppdatert");
         } else {
             ctx.status(404).result("Nyhet finnes ikke");
         }
     }
 
+    // Sletter nyhet
     public static void slettNyhet(Context ctx) {
+
         int id = Integer.parseInt(ctx.pathParam("id"));
 
-        if (nyhetServices.slettNyhet(id)) {
+        if (nyhetService.slettNyhet(id)) {
             ctx.status(200).result("Nyhet slettet");
         } else {
             ctx.status(404).result("Nyhet finnes ikke");
