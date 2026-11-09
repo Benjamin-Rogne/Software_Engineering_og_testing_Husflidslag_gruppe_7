@@ -1,8 +1,10 @@
+
 package models;
 
 import java.time.LocalDateTime;
 
 public class Kurs {
+
     int kurs_id;
     String tittle;
     LocalDateTime start_dato;
@@ -12,12 +14,15 @@ public class Kurs {
     int kursholder_id;
     int paamelding_id;
     String adresse;
-
-    public Kurs(int kurs_id, String tittle, LocalDateTime start_dato, LocalDateTime slutt_dato, float pris, int omraade_id, int kursholder_id, int paamelding_paamelding_id, String adresse) {
     int adresse_id;
     private String bilde;
 
-    public Kurs(int kurs_id, String tittle, LocalDateTime start_dato, LocalDateTime slutt_dato, float pris, int omraade_id, int kursholder_id, int paamelding_paamelding_id, int adresse_id) {
+    // Konstruktør med adresse som String
+    public Kurs(int kurs_id, String tittle, LocalDateTime start_dato,
+                LocalDateTime slutt_dato, float pris, int omraade_id,
+                int kursholder_id, int paamelding_paamelding_id,
+                String adresse) {
+
         this.kurs_id = kurs_id;
         this.tittle = tittle;
         this.start_dato = start_dato;
@@ -29,11 +34,29 @@ public class Kurs {
         this.adresse = adresse;
     }
 
+    // Konstruktør med adresse_id
+    public Kurs(int kurs_id, String tittle, LocalDateTime start_dato,
+                LocalDateTime slutt_dato, float pris, int omraade_id,
+                int kursholder_id, int paamelding_paamelding_id,
+                int adresse_id) {
+
+        this.kurs_id = kurs_id;
+        this.tittle = tittle;
+        this.start_dato = start_dato;
+        this.slutt_dato = slutt_dato;
+        this.pris = pris;
+        this.omraade_id = omraade_id;
+        this.kursholder_id = kursholder_id;
+        this.paamelding_id = paamelding_paamelding_id;
         this.adresse_id = adresse_id;
     }
 
-    // med Bilde
-    public Kurs(String bilde, int kurs_id, String tittle, LocalDateTime start_dato, LocalDateTime slutt_dato, float pris, int omraade_id, int kursholder_id, int paamelding_id, int adresse_id) {
+    //med bilde
+    public Kurs(String bilde, int kurs_id, String tittle,
+                LocalDateTime start_dato, LocalDateTime slutt_dato,
+                float pris, int omraade_id, int kursholder_id,
+                int paamelding_id, int adresse_id) {
+
         this.bilde = bilde;
         this.kurs_id = kurs_id;
         this.tittle = tittle;
@@ -44,14 +67,6 @@ public class Kurs {
         this.kursholder_id = kursholder_id;
         this.paamelding_id = paamelding_id;
         this.adresse_id = adresse_id;
-    }
-
-    public String getBilde() {
-        return bilde;
-    }
-
-    public void setBilde(String bilde) {
-        this.bilde = bilde;
     }
 
     public Kurs() {
@@ -127,6 +142,8 @@ public class Kurs {
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+    }
+
     public int getAdresse_id() {
         return adresse_id;
     }
@@ -134,7 +151,14 @@ public class Kurs {
     public void setAdresse_id(int adresse_id) {
         this.adresse_id = adresse_id;
     }
-}
 
+    public String getBilde() {
+        return bilde;
+    }
+
+    public void setBilde(String bilde) {
+        this.bilde = bilde;
+    }
+}
 
 
