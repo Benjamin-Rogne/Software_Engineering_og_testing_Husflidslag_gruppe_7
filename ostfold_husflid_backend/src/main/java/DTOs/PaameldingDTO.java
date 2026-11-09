@@ -3,6 +3,7 @@ package DTOs;
 public class PaameldingDTO {
     private int brukerId;
     private int kursId;
+    private String paameldings_dato;
 
     public PaameldingDTO(int brukerId, int kursId) {
         this.brukerId = brukerId;
@@ -14,4 +15,8 @@ public class PaameldingDTO {
 
     public int getBrukerId() { return brukerId; }
     public int getKursId() { return kursId; }
+
+    public String getPaameldings_dato() {
+        return paameldings_dato;
+    }
 }

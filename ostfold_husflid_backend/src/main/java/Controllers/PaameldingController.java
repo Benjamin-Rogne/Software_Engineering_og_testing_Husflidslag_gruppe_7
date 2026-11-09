@@ -20,8 +20,8 @@ public class PaameldingController {
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setInt(1, nyPaamelding.getBruker_id());
-            stmt.setInt(2, nyPaamelding.getKurs_id());
+            stmt.setInt(1, nyPaamelding.getBrukerId());
+            stmt.setInt(2, nyPaamelding.getKursId());
             stmt.setTimestamp(3, Timestamp.valueOf(nyPaamelding.getPaameldings_dato()));
 
             int affectedRows = stmt.executeUpdate();
