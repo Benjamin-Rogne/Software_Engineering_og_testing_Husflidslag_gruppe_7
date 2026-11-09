@@ -16,7 +16,7 @@ public class NyhetServices {
         nyheter.add(nyhet);
     }
 
-    public boolean redigerNyhet(int id, Nyhet nyNyhet) {
+    public boolean oppdaterNyhet(int id, Nyhet nyNyhet) {
         for (int i = 0; i < nyheter.size(); i++) {
             if (nyheter.get(i).getNyhet_id() == id) {
                 nyheter.set(i, nyNyhet);
@@ -26,7 +26,7 @@ public class NyhetServices {
         return false;
     }
 
-    public boolean deleteNyhet(int id) {
+    public boolean slettNyhet(int id) {
         return nyheter.removeIf(
                 nyhet -> nyhet.getNyhet_id() == id
         );
