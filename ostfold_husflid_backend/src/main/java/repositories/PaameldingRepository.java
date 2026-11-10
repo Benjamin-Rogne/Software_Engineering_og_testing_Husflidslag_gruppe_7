@@ -43,7 +43,7 @@ public class PaameldingRepository {
     }
 
     //slette bruker fra påmelding
-    public boolean slettPaameling(int idbruker, int idkurs) {
+    public boolean slettPaamelding(int idbruker, int idkurs) {
         String sql = "DELETE FROM paamelding WHERE idbruker = ? AND idkurs = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
