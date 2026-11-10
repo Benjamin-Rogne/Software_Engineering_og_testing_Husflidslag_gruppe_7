@@ -9,7 +9,7 @@ import java.util.Optional;
 public class AktiviteterRepository implements AktiviteterRepositoryInterface {
     private List<Aktiviteter> alleAktiviteter = new ArrayList<>();
 
-    public void AktiviteterRepository() {
+    public AktiviteterRepository() {
         // Legger til noen dummiklasser/-aktiviteter for testing
         alleAktiviteter.add(new Aktiviteter(1, "Kveldskurs i treskjæring", "trearbeid.jpg", "Lær grunnleggende teknikker i trearbeid.", LocalDate.of(2026, 6, 10), 101));
         alleAktiviteter.add(new Aktiviteter(2, "Felles sy-kveld", "sykveld.jpg", "Vi møtes for å sy og reparere klær.", LocalDate.of(2026, 6, 12), 102));

@@ -12,6 +12,8 @@ public class Nyhet {
     int omraade_id;
     int brukere_id;
 
+
+    public Nyhet(){}
     public Nyhet(int nyhet_id, String tittle, String tekst, String bilde,
                  LocalDate date, int omraade_id, int brukere_id) {
 
@@ -25,7 +27,13 @@ public class Nyhet {
 
     }
 
-    public Nyhet(int nyhetId, String oppdateringPåNettsiden, String tekst, LocalDateTime localDateTime) {
+
+
+    public Nyhet(int nyhetId, String tittle, String tekst, LocalDateTime localDateTime) {
+        this.Nyhet_id = nyhetId;
+        this.tittle = tittle;
+        this.tekst = tekst;
+        this.date = localDateTime.toLocalDate();
     }
 
     public int getNyhet_id() {
