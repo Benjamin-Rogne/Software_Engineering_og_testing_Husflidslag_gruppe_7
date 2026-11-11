@@ -6,9 +6,7 @@ import io.javalin.http.Context;
 import repositories.PaameldingRepository;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public class PaameldingController {
     private PaameldingRepository paameldingRepository;
@@ -19,19 +17,23 @@ public class PaameldingController {
     }
 
     public static void registerRoutes(JavalinConfig config) {
-        // Merk: Vi bruker instansmetoder via en lambda/kontroller-instans i Application.java,
-        // eller vi kan koble opp rutene slik Javalin forventer det.
+
     }
 
     //Hente alle påmeldinger
     public void hentAllePaameldinger(Context ctx) {
-        List<PaameldingDTO> paameldinger = paameldingRepository.hentAllePaameldinger();
-        ctx.json(paameldinger);
+        try {
+            List<PaameldingDTO> paameldinger = paameldingRepository.hentAllePaameldinger();
+            ctx.json(paameldinger);
+        } catch (Exception e) {
+            ctx.status(500).result("Kunne ikke hente påmeldinger: " + e.getMessage());
+        }
     }
 
-            stmt.setInt(1, nyPaamelding.getBrukerId());
-            stmt.setInt(2, nyPaamelding.getKursId());
-            stmt.setTimestamp(3, Timestamp.valueOf(nyPaamelding.getPaameldings_dato()));
+    public void erBrukerPaameldt(Context ctx) {
+        try {
+            int brukerId = Integer.parseInt(ctx.queryParam("brukerId"));
+            int kursId = Integer.parseInt(ctx.queryParam("kursId"));
 
             boolean paameldt = paameldingRepository.erBrukerPaameldt(brukerId, kursId);
             ctx.json(paameldt);
@@ -39,6 +41,7 @@ public class PaameldingController {
             ctx.status(400).result("Ugyldige parametere for sjekk av påmelding");
         }
     }
+
 
     // Legge til ny påmelding
     public void leggTilPaamelding(Context ctx) {
@@ -67,7 +70,7 @@ public class PaameldingController {
             int id = Integer.parseInt(ctx.pathParam("id"));
             PaameldingDTO dto = ctx.bodyAsClass(PaameldingDTO.class);
 
-            boolean oppdatert = paameldingRepository.oppdaterPaamelding(
+            boolean oppdatert = paameldingRepository.oppdaterpaamelding(
                     id,
                     dto.getBrukerId(),
                     dto.getKursId(),

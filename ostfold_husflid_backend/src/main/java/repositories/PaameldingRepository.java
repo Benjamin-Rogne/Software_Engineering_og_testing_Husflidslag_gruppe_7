@@ -127,7 +127,6 @@ public class PaameldingRepository {
         }
     }
 
-    public boolean oppdaterPaamelding(int id, int brukerId, int kursId, LocalDateTime datoTid) {
-    }
+
 
 }
