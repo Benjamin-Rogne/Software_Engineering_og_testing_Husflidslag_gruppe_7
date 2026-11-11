@@ -2,6 +2,7 @@ package org.example;
 import Controllers.KursController;
 import io.javalin.Javalin;
 import Controllers.BrukerController;
+import repositories.PaameldingRepository;
 import services.KursServices;
 import DTOs.*;
 import models.*;
@@ -61,6 +62,25 @@ public class APITestMain {
             );
 
         });
+        PaameldingRepository repo = new PaameldingRepository();
+
+        int brukerId = 1;
+        int kursId = 2;
+
+        System.out.println("Før: " +
+                repo.erBrukerPaameldt(brukerId, kursId));
+
+        System.out.println("Opprettet: " +
+                repo.leggTilPaamelding(brukerId, kursId, 1));
+
+        System.out.println("Etter opprettelse: " +
+                repo.erBrukerPaameldt(brukerId, kursId));
+
+        System.out.println("Slettet: " +
+                repo.slettPaameling(brukerId, kursId));
+
+        System.out.println("Etter sletting: " +
+                repo.erBrukerPaameldt(brukerId, kursId));
 
         app.start(7000);
         System.out.println("server has started");

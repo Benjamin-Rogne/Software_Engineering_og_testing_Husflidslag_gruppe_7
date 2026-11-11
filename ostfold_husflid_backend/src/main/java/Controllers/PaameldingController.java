@@ -29,11 +29,9 @@ public class PaameldingController {
         ctx.json(paameldinger);
     }
 
-    //Sjekke om en bruker er påmeldt et gitt kurs (eller hente påmelding for ID)
-    public void erBrukerPaameldt(Context ctx) {
-        try {
-            int brukerId = Integer.parseInt(ctx.queryParam("brukerId"));
-            int kursId = Integer.parseInt(ctx.queryParam("kursId"));
+            stmt.setInt(1, nyPaamelding.getBrukerId());
+            stmt.setInt(2, nyPaamelding.getKursId());
+            stmt.setTimestamp(3, Timestamp.valueOf(nyPaamelding.getPaameldings_dato()));
 
             boolean paameldt = paameldingRepository.erBrukerPaameldt(brukerId, kursId);
             ctx.json(paameldt);
