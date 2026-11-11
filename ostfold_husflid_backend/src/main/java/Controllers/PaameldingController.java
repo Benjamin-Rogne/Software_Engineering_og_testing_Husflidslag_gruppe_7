@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.List;
 
 public class PaameldingController {
-    private PaameldingRepository paameldingRepository;
+    private static PaameldingRepository paameldingRepository;
 
     // Konstruktør for Dependency Injection
     public PaameldingController(PaameldingRepository paameldingRepository) {
@@ -17,11 +17,35 @@ public class PaameldingController {
     }
 
     public static void registerRoutes(JavalinConfig config) {
+        config.routes.get(
+                "/api/påmelding",
+                PaameldingController::hentAllePaameldinger
+        );
 
+        config.routes.get(
+                "/api/påmelding/sjekk",
+                PaameldingController::erBrukerPaameldt
+        );
+
+        config.routes.post(
+                "/api/påmelding",
+                PaameldingController::leggTilPaamelding
+        );
+
+        config.routes.put(
+                "/api/påmelding/{id}",
+                PaameldingController::oppdaterPaamelding
+        );
+
+        config.routes.delete(
+                "/api/påmelding",
+                PaameldingController::slettPaamelding
+        );
     }
 
+
     //Hente alle påmeldinger
-    public void hentAllePaameldinger(Context ctx) {
+    public static void hentAllePaameldinger(Context ctx) {
         try {
             List<PaameldingDTO> paameldinger = paameldingRepository.hentAllePaameldinger();
             ctx.json(paameldinger);
@@ -30,7 +54,7 @@ public class PaameldingController {
         }
     }
 
-    public void erBrukerPaameldt(Context ctx) {
+    public static void erBrukerPaameldt(Context ctx) {
         try {
             int brukerId = Integer.parseInt(ctx.queryParam("brukerId"));
             int kursId = Integer.parseInt(ctx.queryParam("kursId"));
@@ -44,7 +68,7 @@ public class PaameldingController {
 
 
     // Legge til ny påmelding
-    public void leggTilPaamelding(Context ctx) {
+    public static void leggTilPaamelding(Context ctx) {
         try {
             PaameldingDTO nyPaamelding = ctx.bodyAsClass(PaameldingDTO.class);
 
@@ -65,7 +89,7 @@ public class PaameldingController {
     }
 
     //Oppdatere påmelding
-    public void oppdaterPaamelding(Context ctx) {
+    public static void oppdaterPaamelding(Context ctx) {
         try {
             int id = Integer.parseInt(ctx.pathParam("id"));
             PaameldingDTO dto = ctx.bodyAsClass(PaameldingDTO.class);
@@ -88,7 +112,7 @@ public class PaameldingController {
     }
 
     // Slette påmelding
-    public void slettPaamelding(Context ctx) {
+    public static void slettPaamelding(Context ctx) {
         try {
             int idBruker = Integer.parseInt(ctx.queryParam("brukerId"));
             int idKurs = Integer.parseInt(ctx.queryParam("kursId"));
