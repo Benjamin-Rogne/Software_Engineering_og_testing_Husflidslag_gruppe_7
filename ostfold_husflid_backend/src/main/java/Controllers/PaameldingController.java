@@ -18,27 +18,27 @@ public class PaameldingController {
 
     public static void registerRoutes(JavalinConfig config) {
         config.routes.get(
-                "/api/påmelding",
+                "/api/pamelding",
                 PaameldingController::hentAllePaameldinger
         );
 
         config.routes.get(
-                "/api/påmelding/sjekk",
+                "/api/pamelding/sjekk",
                 PaameldingController::erBrukerPaameldt
         );
 
         config.routes.post(
-                "/api/påmelding",
+                "/api/pamelding",
                 PaameldingController::leggTilPaamelding
         );
 
         config.routes.put(
-                "/api/påmelding/{id}",
+                "/api/pamelding/{id}",
                 PaameldingController::oppdaterPaamelding
         );
 
         config.routes.delete(
-                "/api/påmelding",
+                "/api/pamelding",
                 PaameldingController::slettPaamelding
         );
     }

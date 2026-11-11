@@ -1,7 +1,9 @@
 package org.example;
 import Controllers.KursController;
+import controllers.PaameldingController;
 import io.javalin.Javalin;
 import Controllers.BrukerController;
+import repositories.PaameldingDummyRepository;
 import repositories.PaameldingRepository;
 import services.KursServices;
 import DTOs.*;
@@ -21,7 +23,12 @@ public class APITestMain {
         KursController kursController =
                 new KursController(kursServices);
 
+        PaameldingRepository paameldingRepo = new PaameldingRepository();
+        PaameldingController paameldingController = new PaameldingController(paameldingRepo);
+
+
         Javalin app = Javalin.create(config -> {
+
 
             // Bruker API
             BrukerController.registerRoutes(config);
@@ -61,8 +68,21 @@ public class APITestMain {
                     kursController::redigerKurs
             );
 
+
+
+            config.routes.get("/api/pamelding", PaameldingController::hentAllePaameldinger);
+            config.routes.get("/api/pamelding/sjekk", PaameldingController::erBrukerPaameldt);
+            config.routes.post("/api/pamelding", PaameldingController::leggTilPaamelding);
+            config.routes.put("/api/pamelding/{id}", PaameldingController::oppdaterPaamelding);
+            config.routes.delete("/api/pamelding", PaameldingController::slettPaamelding);
+
         });
+
+
+
         PaameldingRepository repo = new PaameldingRepository();
+
+
 
         int brukerId = 1;
         int kursId = 2;
@@ -85,4 +105,8 @@ public class APITestMain {
         app.start(7000);
         System.out.println("server has started");
     }
+
+
+
+
 }
