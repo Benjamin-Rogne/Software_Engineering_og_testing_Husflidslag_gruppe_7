@@ -77,7 +77,7 @@ public class APITestMain {
                 repo.erBrukerPaameldt(brukerId, kursId));
 
         System.out.println("Slettet: " +
-                repo.slettPaameling(brukerId, kursId));
+                repo.slettPaamelding(brukerId, kursId));
 
         System.out.println("Etter sletting: " +
                 repo.erBrukerPaameldt(brukerId, kursId));
