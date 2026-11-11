@@ -8,6 +8,7 @@ import IkkeFunnet from './sider/IkkeFunnet.jsx';
 import Kontakt from './sider/Kontakt.jsx';
 import Aktuelt from './sider/Aktuelt.jsx';
 import Lokallag from './sider/Lokallag.jsx';
+   import Faq from './sider/Faq.jsx';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
       <Route path='/lokallag' element={<Lokallag />} />
       <Route path='*' element={<IkkeFunnet />} />
       <Route path='/aktuelt' element={<Aktuelt />} />
+       <Route path='/faq' element={<Faq />} />
     </Routes>
     <Bunntekst />
     </>
