@@ -1,10 +1,7 @@
 
 package org.example;
 
-import Controllers.KursController;
-import Controllers.BrukerController;
-import Controllers.NyhetController;
-import Controllers.AktivitetController;
+import Controllers.*;
 
 import io.javalin.Javalin;
 import services.KursServices;
@@ -28,6 +25,7 @@ public class APITestMain {
 
             // Bruker API
             BrukerController.registerRoutes(config);
+            AuthController.registerRoutes(config);
 
             // Henter alle kurs
             config.routes.get(
