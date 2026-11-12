@@ -1,4 +1,6 @@
-// Gjør om brukeren fra backend (BrukerDTO) til feltene komponentene bruker
+// kobler til backend for login, loggge ut og reg av bruker
+
+// endrer bruker fra backend til felter som brukes
 function tilFrontend(bruker) {
   return {
     id: bruker.id,
@@ -7,17 +9,8 @@ function tilFrontend(bruker) {
   };
 }
 
+// sender epost + passord, brukeren huskes for økten
 export async function loggInn(epost, passord) {
-  if (DEMO) {
-    const bruker = DEMO_BRUKERE.find(
-      (b) => b.epost === epost && b.passord === passord
-    );
-    if (!bruker) throw new Error("Feil e-post eller passord");
-
-    sessionStorage.setItem("demoBruker", JSON.stringify(tilFrontend(bruker)));
-    return tilFrontend(bruker);
-  }
-
   const svar = await fetch("/api/logg-inn", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -27,40 +20,35 @@ export async function loggInn(epost, passord) {
   if (svar.status === 401) throw new Error("Feil e-post eller passord");
   if (!svar.ok) throw new Error("Kunne ikke logge inn. Prøv igjen senere.");
 
-  return tilFrontend(await svar.json());
+  return tilFrontend(await svar.JSON());
+  
 }
 
-export async function hentInnloggetBruker() {
-  if (DEMO) {
-    const lagret = sessionStorage.getItem("demoBruker");
-    return lagret ? JSON.parse(lagret) : null;
-  }
 
+// spør backend hvem som er innlogget. Forblir innlogget når side lastet
+export async function hentInnloggetBruker() {
   const svar = await fetch("/api/meg");
+
   if (svar.status === 401) return null;
   if (!svar.ok) throw new Error("Kunne ikke hente bruker");
-  return tilFrontend(await svar.json());
+
+  return tilFrontend(await svar.JSON());
 }
 
-
+//backend sletter økten
 export async function loggUt() {
-  if (DEMO) {
-    sessionStorage.removeItem("demoBruker");
-    return;
-  }
-
-  await fetch("/api/logg-ut", { method: "POST" });
+  await fetch("/api/logg-ut", { method: "POST"});
 }
 
+
+// oppretter ny bruker. Ved 400 vises feilmelding fra backend (eks. eposten er i bruk)
 export async function opprettBruker(navn, epost, passord) {
   const svar = await fetch("/api/brukere", {
-    method: "POST",
+    method:"POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ navn, epost, passord }),
   });
 
   if (svar.status === 400) throw new Error(await svar.text());
   if (!svar.ok) throw new Error("Kunne ikke opprette bruker. Prøv igjen senere.");
-
-  return tilFrontend(await svar.json());
 }
