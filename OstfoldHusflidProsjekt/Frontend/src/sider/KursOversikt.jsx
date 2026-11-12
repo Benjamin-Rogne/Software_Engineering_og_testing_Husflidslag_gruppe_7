@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import KursKort from "../komponenter/KursKort.jsx";
 import { hentAlleKurs, OMRADER } from "../api/kurs.js";
 
+ // Henter kursene fra backend når siden åpnes, kan filtreres på område og sorteres
 export default function KursOversikt() {
   const [kursListe, setKursListe] = useState([]);
   const [laster, setLaster] = useState(true);
@@ -9,7 +10,7 @@ export default function KursOversikt() {
   const [sortering, setSortering] = useState("dato");
   const [omrade, setOmrade] = useState("");
 
-  // Henter kursene fra backend når siden åpnes
+ // henter kursene fra backend
   useEffect(() => {
     hentAlleKurs()
       .then(setKursListe)
@@ -40,7 +41,7 @@ export default function KursOversikt() {
             <option value="dato">Dato</option>
             <option value="pris">Pris</option>
           </select>
-
+          {/* har ikke en synlig label, aria-label sier til skjermleser hva det er */}
           <select
             id="omraade"
             aria-label="Område"
@@ -48,19 +49,24 @@ export default function KursOversikt() {
             onChange={(e) => setOmrade(e.target.value)}
           >
             <option value="">Hele Østfold</option>
+            {/* ett valg for hver område */}
             {OMRADER.map((o) => (
               <option key={o} value={o}>{o}</option>
             ))}
           </select>
         </form>
       </section>
+      
 
+      {/* kun en av meldingene vises om gangen */}
       {laster && <p>Henter kurs …</p>}
       {feil && <p role="alert">{feil}. Prøv igjen senere.</p>}
       {!laster && !feil && visteKurs.length === 0 && (
         <p>Ingen kurs i dette området ennå.</p>
       )}
 
+
+      {/* ett kurskort per kurs, key for at react skal ha kontroll på de */}
       <section className="kurs-container" aria-label="Kurs">
         {visteKurs.map((kurs) => (
           <KursKort key={kurs.id} kurs={kurs} />

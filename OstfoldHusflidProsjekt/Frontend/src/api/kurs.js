@@ -1,12 +1,12 @@
-// Henter kurs fra backend og gjør dataene klar for komponentene
+// henter kurs fra backend og endrer format til frontend
 
-// Områdene som vises i filteret på kurssiden
+//alle områder i filteret
 export const OMRADER = [
   "Fredrikstad", "Sarpsborg", "Moss", "Halden",
   "Råde", "Hobøl", "Rygge", "Indre Østfold",
 ];
 
-// Kobler omraade_id fra backend til navn
+// endrer fra id tall til nummer
 const OMRADE_NAVN = {
   1: "Halden",
   2: "Fredrikstad",
@@ -14,10 +14,8 @@ const OMRADE_NAVN = {
   4: "Moss",
 };
 
-// Bildemappe definert
-const BILDE_MAPPE = "/bilder/";
-
-// Finner områdenavnet. Er id-en ukjent, letes det etter byen i adressen.
+// finner områdenavnet, prøver omraade_id, for så om adressen inneholder stedsnavn
+// bruker ?? til å søke etter neste vist den ikke får treff
 function finnOmrade(kurs) {
   return (
     OMRADE_NAVN[kurs.omraade_id] ??
@@ -26,12 +24,12 @@ function finnOmrade(kurs) {
   );
 }
 
-// Backend sender "2026-11-20 10:00", men JavaScript trenger "2026-11-20T10:00"
+// bytter mellomrom med T så JS forstår datoen
 function tilDatoTid(tekst) {
   return tekst ? tekst.replace(" ", "T") : "";
 }
 
-// Gjør om ett kurs fra backend til feltene komponentene bruker
+// endrer feltnavnene brukt i backend til de som brukes i frontend
 function tilFrontend(kurs) {
   return {
     id: kurs.kurs_id,
@@ -41,11 +39,11 @@ function tilFrontend(kurs) {
     start: tilDatoTid(kurs.start_dato),
     slutt: tilDatoTid(kurs.slutt_dato),
     omrade: finnOmrade(kurs),
-    bilde: kurs.bilde ? `${BILDE_MAPPE}${kurs.bilde}.jpg` : null,
+    bilde: "/bilder/kurs.jpg", // samme bilde for alle til det ligger bilder i backend
   };
 }
 
-// Henter alle kurs
+// henter kursene fra backend, viser feilmelding hvis backend ikke svarer
 export async function hentAlleKurs() {
   const svar = await fetch("/api/kurs");
 
@@ -57,6 +55,8 @@ export async function hentAlleKurs() {
   return kursFraBackend.map(tilFrontend);
 }
 
+
+// henter foreløpig ett kurs ved å lete gjennom alle
 export async function hentKurs(id) {
   const alleKurs = await hentAlleKurs();
   return alleKurs.find((kurs) => kurs.id === Number(id)) ?? null;

@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 
+
+// vises når adressen/ruten ikke finnes.
 export default function IkkeFunnet() {
     return (
         <main className="ikke-funnet">
