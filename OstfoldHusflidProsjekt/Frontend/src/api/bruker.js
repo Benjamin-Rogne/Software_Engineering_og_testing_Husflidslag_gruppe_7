@@ -20,7 +20,7 @@ export async function loggInn(epost, passord) {
   if (svar.status === 401) throw new Error("Feil e-post eller passord");
   if (!svar.ok) throw new Error("Kunne ikke logge inn. Prøv igjen senere.");
 
-  return tilFrontend(await svar.JSON());
+  return tilFrontend(await svar.json());
   
 }
 
