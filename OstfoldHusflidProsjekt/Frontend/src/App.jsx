@@ -12,7 +12,8 @@ import Aktuelt from "./sider/Aktuelt.jsx";
 import LoggInn from "./sider/LoggInn.jsx";
 import OpprettBruker from "./sider/OpprettBruker.jsx";
 import IkkeFunnet from "./sider/IkkeFunnet.jsx";
-
+import Faq from "./sider/Faq.jsx";
+import Lokallag from "./sider/Lokallag.jsx";
 
 //ramme rundt alle sider: toppfelt, meny, innhold og bunntekst
 export default function App() {
@@ -41,6 +42,8 @@ export default function App() {
         <Route path="/kurs/:id" element={<KursInfo />} />
         <Route path="/aktuelt" element={<Aktuelt />} />
         <Route path="/kontakt" element={<Kontakt />} />
+        < Route path="/faq" element={<Faq />} />
+        < Route path="/lokallag" element={<Lokallag />} />
         {/* Logginn får setbruker så toppfeltet oppdateres etter innlogging */}
         <Route path="/logg-inn" element={<LoggInn setBruker={setBruker} />} />
         <Route path="/opprett-bruker" element={<OpprettBruker />} />

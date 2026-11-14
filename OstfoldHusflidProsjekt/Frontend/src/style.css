@@ -61,6 +61,7 @@ a {
 .innhold > .kurs-kort a,
 .kurs-filtrering form,
 .kurs-container .kurs-kort,
+.lokallag-kort,
 .kort,
 .nyheter,
 .faq-liste,
@@ -640,6 +641,26 @@ a {
     margin-top: 0;
 }
 
+/* Våre lokallag */
+.lokallag-liste {
+    display: grid;
+    grid-template-columns: 1 fr 1 fr;
+    gap: 20px;
+}
+
+.lokallag-kort {
+    padding: 20px 24px;
+}
+
+.lokallag-kort h2 {
+    margin: 0 0 6px;
+    font-size: 1.2rem;
+}
+
+.lokallag-kort p {
+    margin: 0;
+    color: var(--tekst-dempet);
+}
 
 /* ofte stilte spørsmål*/
 .faq-ingress {
