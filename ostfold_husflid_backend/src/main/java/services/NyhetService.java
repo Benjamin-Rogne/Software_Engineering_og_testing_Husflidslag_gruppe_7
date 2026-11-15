@@ -81,29 +81,12 @@ public class NyhetService {
 
         Nyhet nyhet = repository.hentNyhet(id).orElse(null);
 
-        if (nyhet == null) {
-            return false;
-        }
-
-        if (dto.getTittle() != null) {
-            nyhet.setTittle(dto.getTittle());
-        }
-
-        if (dto.getTekst() != null) {
-            nyhet.setTekst(dto.getTekst());
-        }
-
-        if (dto.getBilde() != null) {
-            nyhet.setBilde(dto.getBilde());
-        }
-
-        if (dto.getDate() != null) {
-            nyhet.setDate(LocalDate.parse(dto.getDate()));
-        }
-
-        if (dto.getOmraade_id() != 0) {
-            nyhet.setOmraade_id(dto.getOmraade_id());
-        }
+        if (nyhet == null) {return false;}
+        if (dto.getTittle() != null) {nyhet.setTittle(dto.getTittle());}
+        if (dto.getTekst() != null) {nyhet.setTekst(dto.getTekst());}
+        if (dto.getBilde() != null) {nyhet.setBilde(dto.getBilde());}
+        if (dto.getDate() != null) {nyhet.setDate(LocalDate.parse(dto.getDate()));}
+        if (dto.getOmraade_id() != 0) {nyhet.setOmraade_id(dto.getOmraade_id());}
 
         if (dto.getBrukere_id() != 0) {
             nyhet.setBrukere_id(dto.getBrukere_id());
