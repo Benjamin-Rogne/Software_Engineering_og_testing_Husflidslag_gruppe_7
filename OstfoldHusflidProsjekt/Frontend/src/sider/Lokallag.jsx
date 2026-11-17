@@ -5,7 +5,7 @@ export default function Lokallag() {
     return (
         <main className='innhold'>
             <h1>Våre lokallag</h1>
-            <section className='kurs-container'>
+            <section className='lokallag-liste' aria-label='Lokallag'>
                 {lokallagListe.map((lag) => (
                     <LokallagKort key={lag.id} lag={lag} />
                 ))}

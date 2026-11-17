@@ -4,20 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 // henter data fra databasen og sender den videre til service og deretter controller til slutt react
-/*
-public class BrukerRepository {
-
-    public List<Bruker> hentAlleBrukere() {
-        return List.copyOf(DummyDatabase.brukere);
-    }
-
-    public Optional<Bruker> hentBruker(int id) {
-        return DummyDatabase.brukere.stream()
-                .filter(bruker -> bruker.getBruker_id() == id)
-                .findFirst();
-    }
-}
-*/
 
 import Database.DatabaseConnection;
 import models.Bruker;
@@ -172,5 +158,34 @@ public class BrukerRepository {
         } catch (SQLException e) {
             throw new RuntimeException("Kunne ikke slette bruker", e);
         }
+    }
+    public Optional<Bruker> hentBrukerMedEpost(String epost) {
+        String sql = "SELECT * FROM bruker WHERE Epost = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, epost);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Konverter ResultSet til Bruker
+                    Bruker bruker = new Bruker(
+                            rs.getInt("idBruker"),
+                            rs.getString("Navn"),
+                            rs.getString("Epost"),
+                            rs.getString("Passord"),
+                            rs.getString("Rolle")
+                    );
+
+                    return Optional.of(bruker);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Kunne ikke hente bruker", e);
+        }
+
+        return Optional.empty();
     }
 }
