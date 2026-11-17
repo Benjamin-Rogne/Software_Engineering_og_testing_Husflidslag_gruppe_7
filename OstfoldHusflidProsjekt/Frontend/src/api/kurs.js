@@ -39,7 +39,7 @@ function tilFrontend(kurs) {
     start: tilDatoTid(kurs.start_dato),
     slutt: tilDatoTid(kurs.slutt_dato),
     omrade: finnOmrade(kurs),
-    bilde: "/bilder/kurs.jpg", // samme bilde for alle til det ligger bilder i backend
+    bilde: "/bilder/Orange.png", // samme bilde for alle til det ligger bilder i backend
   };
 }
 
