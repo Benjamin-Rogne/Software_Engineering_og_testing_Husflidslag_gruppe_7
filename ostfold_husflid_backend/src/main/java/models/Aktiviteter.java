@@ -19,6 +19,9 @@ public class Aktiviteter {
         this.omraade_id = omraade_id;
 
     }
+    //så att services kan ta emot en tom objekt
+    public Aktiviteter() {
+    }
 
     public int getAktivitet_id() {
         return aktivitet_id;

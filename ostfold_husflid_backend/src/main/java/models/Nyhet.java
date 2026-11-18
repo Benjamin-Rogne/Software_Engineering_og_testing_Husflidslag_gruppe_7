@@ -1,6 +1,7 @@
 package models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Nyhet {
     int Nyhet_id;
@@ -11,6 +12,8 @@ public class Nyhet {
     int omraade_id;
     int brukere_id;
 
+
+    public Nyhet(){}
     public Nyhet(int nyhet_id, String tittle, String tekst, String bilde,
                  LocalDate date, int omraade_id, int brukere_id) {
 
@@ -22,6 +25,15 @@ public class Nyhet {
         this.omraade_id = omraade_id;
         this.brukere_id = brukere_id;
 
+    }
+
+
+
+    public Nyhet(int nyhetId, String tittle, String tekst, LocalDateTime localDateTime) {
+        this.Nyhet_id = nyhetId;
+        this.tittle = tittle;
+        this.tekst = tekst;
+        this.date = localDateTime.toLocalDate();
     }
 
     public int getNyhet_id() {

@@ -1,30 +1,34 @@
-package models;
+package DTOs;
 
 import java.time.LocalDateTime;
 
-public class Kursklasse {
-    int kurs_id;
-    String tittle;
-    LocalDateTime start_dato;
-    LocalDateTime slutt_dato;
-    float pris;
-    int omraade_id;
-    int kursholder_id;
-    int paamelding_id;
-    String adresse;
+public class KursDTO  {
+    private int kurs_id;
+    private String tittel;
+    private LocalDateTime start_dato;
+    private LocalDateTime slutt_dato;
+    private float pris;
+    private int omraade_id;
+    private int kursholder_id;
+    private int paamelding_id;
+    private String adresse;
 
-    public Kursklasse(int kurs_id, String tittle, LocalDateTime start_dato, LocalDateTime slutt_dato, float pris, int omraade_id, int kursholder_id, int paamelding_paamelding_id, String adresse) {
+
+    public KursDTO(int kurs_id, String tittel, LocalDateTime start_dato, LocalDateTime slutt_dato, float pris, int omraade_id, int kursholder_id, int paamelding_id, String adresse) {
         this.kurs_id = kurs_id;
-        this.tittle = tittle;
+        this.tittel = tittel;
         this.start_dato = start_dato;
         this.slutt_dato = slutt_dato;
         this.pris = pris;
         this.omraade_id = omraade_id;
         this.kursholder_id = kursholder_id;
-        this.paamelding_id = paamelding_paamelding_id;
+        this.paamelding_id = paamelding_id;
         this.adresse = adresse;
     }
 
+
+    public KursDTO() {
+    }
 
     public int getKurs_id() {
         return kurs_id;
@@ -34,12 +38,12 @@ public class Kursklasse {
         this.kurs_id = kurs_id;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTittel() {
+        return tittel;
     }
 
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setTittel(String tittel) {
+        this.tittel = tittel;
     }
 
     public LocalDateTime getStart_dato() {
@@ -97,7 +101,23 @@ public class Kursklasse {
     public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
-}
 
+
+
+    @Override
+    public String toString() {
+        return "KursDTO{" +
+                "kurs_id=" + kurs_id +
+                ", tittel='" + tittel + '\'' +
+                ", start_dato=" + start_dato +
+                ", slutt_dato=" + slutt_dato +
+                ", pris=" + pris +
+                ", omraade_id=" + omraade_id +
+                ", kursholder_id=" + kursholder_id +
+                ", paamelding_id=" + paamelding_id +
+                ", adresse='" + adresse + '\'' +
+                '}';
+    }
+}
 
 

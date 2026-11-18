@@ -1,6 +1,6 @@
 package DTOs;
 import java.time.format.DateTimeFormatter;
-import models.Kursklasse;
+import models.Kurs;
 
 public class KursDto2 {
 
@@ -12,9 +12,10 @@ public class KursDto2 {
         private int omraade_id;
         private int kursholder_id;
         private int paamelding_id;
-        private String adresse;
+        private int adresse_id;
+        private String bilde;
 
-        public KursDto2(Kursklasse kurs) {
+        public KursDto2(Kurs kurs) {
 
             DateTimeFormatter formatter =
                     DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -29,7 +30,8 @@ public class KursDto2 {
             this.omraade_id = kurs.getOmraade_id();
             this.kursholder_id = kurs.getKursholder_id();
             this.paamelding_id = kurs.getPaamelding_id();
-            this.adresse = kurs.getAdresse();
+            this.adresse_id = kurs.getAdresse_id();
+            this.bilde = kurs.getBilde();
         }
 
         public int getKurs_id() {
@@ -64,7 +66,11 @@ public class KursDto2 {
             return paamelding_id;
         }
 
-        public String getAdresse() {
-            return adresse;
+        public int getAdresse_id() {
+            return adresse_id;
+        }
+
+        public String getBilde() {
+        return bilde;
         }
 }

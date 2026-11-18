@@ -6,7 +6,7 @@ import models.Bruker;
 import repositories.BrukerRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import DTOs.OppdaterBrukerDTO;
-
+import org.mindrot.jbcrypt.BCrypt;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,9 +57,9 @@ public class BrukerService {
 
         // Valider passord
         if (dto.getPassord() == null ||
-                dto.getPassord().length() < 12) {
+                dto.getPassord().length() < 8) {
             throw new IllegalArgumentException(
-                    "Passord må ha minst 12 tegn"
+                    "Passord må ha minst 8 tegn"
             );
         }
 
